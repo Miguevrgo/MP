@@ -1,0 +1,506 @@
+\hypertarget{classLanguage}{}\doxysection{Language Class Reference}
+\label{classLanguage}\index{Language@{Language}}
+
+
+It defines a model for a given language. It contains a vector of pairs Bigram-\/frequency (objects of the class \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}}) and an identifier (string) of the language.  
+
+
+
+
+{\ttfamily \#include $<$Language.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLanguage_a09448361f9188bceaaeebc5576cd6896}\label{classLanguage_a09448361f9188bceaaeebc5576cd6896}} 
+\mbox{\hyperlink{classLanguage_a09448361f9188bceaaeebc5576cd6896}{Language}} ()
+\begin{DoxyCompactList}\small\item\em Base constructor. It builds a \mbox{\hyperlink{classLanguage}{Language}} object with \char`\"{}unknown\char`\"{} as identifier, and an empty vector of pairs Bigram-\/frequency. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classLanguage_a1af860af276c044418eff975b14a52e1}{Language}} (int number\+Bigrams)
+\begin{DoxyCompactList}\small\item\em It builds a \mbox{\hyperlink{classLanguage}{Language}} object with \char`\"{}unknow\char`\"{} as identifier, and a vector of {\ttfamily number\+Bigrams} pairs Bigram-\/frequency. Each pair will be initialized as \char`\"{}\+\_\+\+\_\+\char`\"{} for the \mbox{\hyperlink{classBigram}{Bigram}} and 0 for the frequency. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classLanguage_aae8315a799767910c0bcc0ba47595081}{get\+Language\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Returns the identifier of this language object. Query method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLanguage_a6c7e6d42b7e73196237d67cc04807d08}{set\+Language\+Id}} (std\+::string id)
+\begin{DoxyCompactList}\small\item\em Sets a new identifier for this language object. Modifier method. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} \& \mbox{\hyperlink{classLanguage_a18a22d3e44e1aa2e93298701b70006a5}{at}} (int index) const
+\begin{DoxyCompactList}\small\item\em Gets a const reference to the \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} at the given position of the vector in this object. Query method. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} \& \mbox{\hyperlink{classLanguage_a0e8fb5502564a589deec100956982e64}{at}} (int index)
+\begin{DoxyCompactList}\small\item\em Gets a reference to the \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} at the given position of the vector in this object. Query and modifier method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classLanguage_aee3824f81dbbee521a28b6de3e210e2a}{get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} objects. Query method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classLanguage_a073b07a53c240276b4b0476ea4a4b7ad}{find\+Bigram}} (const \mbox{\hyperlink{classBigram}{Bigram}} \&bigram) const
+\begin{DoxyCompactList}\small\item\em Searchs the given bigram in the list of bigrams in this \mbox{\hyperlink{classLanguage}{Language}}. If found, it returns the position where it was found. If not, it returns -\/1. We consider that position 0 is the one of the first bigram in the list of bigrams and this-\/$>$\mbox{\hyperlink{classLanguage_aee3824f81dbbee521a28b6de3e210e2a}{get\+Size()}}-\/1 the one of the last bigram. Query method. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classLanguage_ac06065988f5b735b888faecf7f6329a5}{to\+String}} () const
+\begin{DoxyCompactList}\small\item\em Obtains a string with the following content\+: \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLanguage_a9e5992e8893e995e99677da8a73094b8}\label{classLanguage_a9e5992e8893e995e99677da8a73094b8}} 
+void \mbox{\hyperlink{classLanguage_a9e5992e8893e995e99677da8a73094b8}{sort}} ()
+\begin{DoxyCompactList}\small\item\em Sort the vector of \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} in decreasing order of frequency. If two \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} objects have the same frequency, then the alphabetical order of the bigrams of those objects will be considered (the object with a bigram that comes first alphabetically will appear first) Modifier method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLanguage_a836fbfd47e33674834d3de142d015a4d}{save}} (const char file\+Name\mbox{[}$\,$\mbox{]}) const
+\begin{DoxyCompactList}\small\item\em Saves this \mbox{\hyperlink{classLanguage}{Language}} object in the given file. Query method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLanguage_af0eeaecee6e1b049f51fb506face7a67}{load}} (const char file\+Name\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Loads into this object the \mbox{\hyperlink{classLanguage}{Language}} object stored in the given file Modifier method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLanguage_a286009f1d1005c0d7c4286653d409d42}{append}} (\mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} bigram\+Freq)
+\begin{DoxyCompactList}\small\item\em Appends a copy of the given \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} to this \mbox{\hyperlink{classLanguage}{Language}} object. If the bigram is found in this object, then its frequency is increased with the one of the given \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} object. If not, a copy of the given \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} object is appended to the end of the list of \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} objects in this \mbox{\hyperlink{classLanguage}{Language}}. @thow std\+::out\+\_\+of\+\_\+range Throws a std\+::out\+\_\+of\+\_\+range exception in case that a new element must be appended to the end of the array and the number of elements in the array of \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} is equals to the capacity of that array. In that case, the array is full, and no more elements can be appended to the array. Modifier method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLanguage_ab555a6e07a99ad77d6d8061ea92f187a}{join}} (const \mbox{\hyperlink{classLanguage}{Language}} \&language)
+\begin{DoxyCompactList}\small\item\em Appends to this \mbox{\hyperlink{classLanguage}{Language}} object, the list of pairs ~\newline
+ bigram-\/frequency objects contained in the \mbox{\hyperlink{classLanguage}{Language}} {\ttfamily language}. This method uses the method \mbox{\hyperlink{classLanguage_a286009f1d1005c0d7c4286653d409d42}{append(\+Bigram\+Freq bigram\+Freq)}} to append the pairs bigram-\/frequency contained in the \mbox{\hyperlink{classLanguage}{Language}} {\ttfamily language} Modifier method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+It defines a model for a given language. It contains a vector of pairs Bigram-\/frequency (objects of the class \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}}) and an identifier (string) of the language. 
+
+Definition at line 29 of file Language.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLanguage_a1af860af276c044418eff975b14a52e1}\label{classLanguage_a1af860af276c044418eff975b14a52e1}} 
+\index{Language@{Language}!Language@{Language}}
+\index{Language@{Language}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{Language()}{Language()}}
+{\footnotesize\ttfamily Language\+::\+Language (\begin{DoxyParamCaption}\item[{int}]{number\+Bigrams }\end{DoxyParamCaption})}
+
+
+
+It builds a \mbox{\hyperlink{classLanguage}{Language}} object with \char`\"{}unknow\char`\"{} as identifier, and a vector of {\ttfamily number\+Bigrams} pairs Bigram-\/frequency. Each pair will be initialized as \char`\"{}\+\_\+\+\_\+\char`\"{} for the \mbox{\hyperlink{classBigram}{Bigram}} and 0 for the frequency. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws a std\+::out\+\_\+of\+\_\+range exception if {\ttfamily number\+Bigrams} $>$ {\ttfamily DIM\+\_\+\+VECTOR\+\_\+\+BIGRAM\+\_\+\+FREQ} or number\+Bigrams$<$0 \\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em number\+Bigrams} & The number of bigrams to use in this \mbox{\hyperlink{classLanguage}{Language}}. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 27 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{27                                    \{}
+\DoxyCodeLine{28     \textcolor{keywordflow}{if}(numberBigrams>DIM\_VECTOR\_BIGRAM\_FREQ)\{}
+\DoxyCodeLine{29         \textcolor{keywordflow}{throw} std::out\_of\_range(std::string(\textcolor{stringliteral}{"{}Language::Language(int numberBigrams)"{}}) +}
+\DoxyCodeLine{30          \textcolor{stringliteral}{"{}invalid number of bigrams"{}} + std::to\_string(numberBigrams));}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32     \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{33         \_languageId=\textcolor{stringliteral}{"{}unknown"{}};}
+\DoxyCodeLine{34         \_vectorBigramFreq[numberBigrams];}
+\DoxyCodeLine{35         \_size=0;}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37    }
+\DoxyCodeLine{38 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLanguage_a286009f1d1005c0d7c4286653d409d42}\label{classLanguage_a286009f1d1005c0d7c4286653d409d42}} 
+\index{Language@{Language}!append@{append}}
+\index{append@{append}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily void Language\+::append (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}}}]{bigram\+Freq }\end{DoxyParamCaption})}
+
+
+
+Appends a copy of the given \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} to this \mbox{\hyperlink{classLanguage}{Language}} object. If the bigram is found in this object, then its frequency is increased with the one of the given \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} object. If not, a copy of the given \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} object is appended to the end of the list of \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} objects in this \mbox{\hyperlink{classLanguage}{Language}}. @thow std\+::out\+\_\+of\+\_\+range Throws a std\+::out\+\_\+of\+\_\+range exception in case that a new element must be appended to the end of the array and the number of elements in the array of \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} is equals to the capacity of that array. In that case, the array is full, and no more elements can be appended to the array. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bigram\+Freq} & The \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} to append to this object. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 204 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{204                                           \{}
+\DoxyCodeLine{205     \textcolor{keywordflow}{if}(\mbox{\hyperlink{classLanguage_a073b07a53c240276b4b0476ea4a4b7ad}{findBigram}}(bigramFreq.\mbox{\hyperlink{classBigramFreq_a70b62a6da922585cff4e2751fe478e41}{getBigram}}())==-\/1)\{}
+\DoxyCodeLine{206         \_vectorBigramFreq[\_size]=bigramFreq;}
+\DoxyCodeLine{207         \_size++;}
+\DoxyCodeLine{208     \}}
+\DoxyCodeLine{209     \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{210         \textcolor{keywordtype}{int} pos=\mbox{\hyperlink{classLanguage_a073b07a53c240276b4b0476ea4a4b7ad}{findBigram}}(bigramFreq.\mbox{\hyperlink{classBigramFreq_a70b62a6da922585cff4e2751fe478e41}{getBigram}}());}
+\DoxyCodeLine{211         \textcolor{comment}{//We could have used an auxiliary method to increment the frequency, however, i find}}
+\DoxyCodeLine{212         \textcolor{comment}{//this implementation better to avoid creating unncecesary methods}}
+\DoxyCodeLine{213         \_vectorBigramFreq[pos]}
+\DoxyCodeLine{214         .\mbox{\hyperlink{classBigramFreq_a4e81e3f63bd80b4ca42dba6014c836e3}{setFrequency}}(\_vectorBigramFreq[pos].getFrequency()+bigramFreq.\mbox{\hyperlink{classBigramFreq_a2678f74a436cca1ff40af7a1ac7b219a}{getFrequency}}());        }
+\DoxyCodeLine{215     \}}
+\DoxyCodeLine{216 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_a0e8fb5502564a589deec100956982e64}\label{classLanguage_a0e8fb5502564a589deec100956982e64}} 
+\index{Language@{Language}!at@{at}}
+\index{at@{at}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} \& Language\+::at (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Gets a reference to the \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} at the given position of the vector in this object. Query and modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the position to consider. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws an std\+::out\+\_\+of\+\_\+range exception if the given index is not valid \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+A reference to the \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} at the given position 
+\end{DoxyReturn}
+
+
+Definition at line 58 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{58                                  \{}
+\DoxyCodeLine{59     \textcolor{keywordflow}{if}(index<0 || index>=\_size)\{}
+\DoxyCodeLine{60         \textcolor{keywordflow}{throw} std::out\_of\_range(std::string(\textcolor{stringliteral}{"{}BigramFreq\& Language::at(int index)"{}}) +}
+\DoxyCodeLine{61          \textcolor{stringliteral}{"{}invalid position"{}} + std::to\_string(index));}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63     \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{64         \textcolor{keywordflow}{return} \_vectorBigramFreq[index];}
+\DoxyCodeLine{65     \}}
+\DoxyCodeLine{66 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_a18a22d3e44e1aa2e93298701b70006a5}\label{classLanguage_a18a22d3e44e1aa2e93298701b70006a5}} 
+\index{Language@{Language}!at@{at}}
+\index{at@{at}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} \& Language\+::at (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}) const}
+
+
+
+Gets a const reference to the \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} at the given position of the vector in this object. Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the position to consider. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws an std\+::out\+\_\+of\+\_\+range exception if the given index is not valid \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+A const reference to the \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} at the given position 
+\end{DoxyReturn}
+
+
+Definition at line 48 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{48                                              \{}
+\DoxyCodeLine{49     \textcolor{keywordflow}{if}(index<0 || index>=\_size)\{}
+\DoxyCodeLine{50         \textcolor{keywordflow}{throw} std::out\_of\_range(std::string(\textcolor{stringliteral}{"{}const BigramFreq\& Language::at(int index) const"{}}) +}
+\DoxyCodeLine{51          \textcolor{stringliteral}{"{}invalid position"{}} + std::to\_string(index));}
+\DoxyCodeLine{52     \}}
+\DoxyCodeLine{53     \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{54         \textcolor{keywordflow}{return} \_vectorBigramFreq[index];}
+\DoxyCodeLine{55     \}}
+\DoxyCodeLine{56 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_a073b07a53c240276b4b0476ea4a4b7ad}\label{classLanguage_a073b07a53c240276b4b0476ea4a4b7ad}} 
+\index{Language@{Language}!findBigram@{findBigram}}
+\index{findBigram@{findBigram}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{findBigram()}{findBigram()}}
+{\footnotesize\ttfamily int Language\+::find\+Bigram (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classBigram}{Bigram}} \&}]{bigram }\end{DoxyParamCaption}) const}
+
+
+
+Searchs the given bigram in the list of bigrams in this \mbox{\hyperlink{classLanguage}{Language}}. If found, it returns the position where it was found. If not, it returns -\/1. We consider that position 0 is the one of the first bigram in the list of bigrams and this-\/$>$\mbox{\hyperlink{classLanguage_aee3824f81dbbee521a28b6de3e210e2a}{get\+Size()}}-\/1 the one of the last bigram. Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bigram} & A bigram. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+The list of bigrams should be ordered in decreasing order of frequency. This is not checked in this method. 
+\end{DoxyPrecond}
+\begin{DoxyReturn}{Returns}
+If found, it returns the position where the bigram was found. If not, it returns -\/1 
+\end{DoxyReturn}
+
+
+Definition at line 72 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{72                                                   \{}
+\DoxyCodeLine{73     \textcolor{keywordtype}{bool} found=\textcolor{keyword}{false};}
+\DoxyCodeLine{74     \textcolor{keywordtype}{int} pos=0;}
+\DoxyCodeLine{75     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\mbox{\hyperlink{classLanguage_aee3824f81dbbee521a28b6de3e210e2a}{getSize}}();i++)\{}
+\DoxyCodeLine{76         \textcolor{keywordflow}{if} (bigram.\mbox{\hyperlink{classBigram_abe556b67a3bd1a2bd80e6945718388c7}{getText}}() == \_vectorBigramFreq[i].\mbox{\hyperlink{classBigramFreq_a70b62a6da922585cff4e2751fe478e41}{getBigram}}().\mbox{\hyperlink{classBigram_abe556b67a3bd1a2bd80e6945718388c7}{getText}}())\{}
+\DoxyCodeLine{77             found=\textcolor{keyword}{true};}
+\DoxyCodeLine{78             pos=i;}
+\DoxyCodeLine{79         \}}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81     \textcolor{keywordflow}{return} (found) ? pos : -\/1; \textcolor{comment}{//If found return pos else return -\/1}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_aae8315a799767910c0bcc0ba47595081}\label{classLanguage_aae8315a799767910c0bcc0ba47595081}} 
+\index{Language@{Language}!getLanguageId@{getLanguageId}}
+\index{getLanguageId@{getLanguageId}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{getLanguageId()}{getLanguageId()}}
+{\footnotesize\ttfamily const std\+::string \& Language\+::get\+Language\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the identifier of this language object. Query method. 
+
+\begin{DoxyReturn}{Returns}
+A const reference to the identifier of this language object. 
+\end{DoxyReturn}
+
+
+Definition at line 40 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40                                               \{}
+\DoxyCodeLine{41     \textcolor{keywordflow}{return} \_languageId;}
+\DoxyCodeLine{42 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_aee3824f81dbbee521a28b6de3e210e2a}\label{classLanguage_aee3824f81dbbee521a28b6de3e210e2a}} 
+\index{Language@{Language}!getSize@{getSize}}
+\index{getSize@{getSize}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily int Language\+::get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} objects. Query method. 
+
+\begin{DoxyReturn}{Returns}
+The number of \mbox{\hyperlink{classBigramFreq}{Bigram\+Freq}} objects 
+\end{DoxyReturn}
+
+
+Definition at line 68 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{68                            \{}
+\DoxyCodeLine{69     \textcolor{keywordflow}{return} \_size;}
+\DoxyCodeLine{70 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_ab555a6e07a99ad77d6d8061ea92f187a}\label{classLanguage_ab555a6e07a99ad77d6d8061ea92f187a}} 
+\index{Language@{Language}!join@{join}}
+\index{join@{join}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily void Language\+::join (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classLanguage}{Language}} \&}]{language }\end{DoxyParamCaption})}
+
+
+
+Appends to this \mbox{\hyperlink{classLanguage}{Language}} object, the list of pairs ~\newline
+ bigram-\/frequency objects contained in the \mbox{\hyperlink{classLanguage}{Language}} {\ttfamily language}. This method uses the method \mbox{\hyperlink{classLanguage_a286009f1d1005c0d7c4286653d409d42}{append(\+Bigram\+Freq bigram\+Freq)}} to append the pairs bigram-\/frequency contained in the \mbox{\hyperlink{classLanguage}{Language}} {\ttfamily language} Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em language} & A \mbox{\hyperlink{classLanguage}{Language}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 218 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{218                                            \{}
+\DoxyCodeLine{219     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<language.\mbox{\hyperlink{classLanguage_aee3824f81dbbee521a28b6de3e210e2a}{getSize}}();i++)\{}
+\DoxyCodeLine{220         \mbox{\hyperlink{classLanguage_a286009f1d1005c0d7c4286653d409d42}{append}}(language.\mbox{\hyperlink{classLanguage_a18a22d3e44e1aa2e93298701b70006a5}{at}}(i));}
+\DoxyCodeLine{221     \}}
+\DoxyCodeLine{222 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_af0eeaecee6e1b049f51fb506face7a67}\label{classLanguage_af0eeaecee6e1b049f51fb506face7a67}} 
+\index{Language@{Language}!load@{load}}
+\index{load@{load}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void Language\+::load (\begin{DoxyParamCaption}\item[{const char}]{file\+Name\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Loads into this object the \mbox{\hyperlink{classLanguage}{Language}} object stored in the given file Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & A c-\/string with the name of the file where the \mbox{\hyperlink{classLanguage}{Language}} will be stored. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws a std\+::out\+\_\+of\+\_\+range exception if the number of bigrams in the given file, cannot be allocated in this \mbox{\hyperlink{classLanguage}{Language}} because it exceeds the maximum capacity \\
+\hline
+{\em std\+::ios\+\_\+base\+::failure} & Throws a std\+::ios\+\_\+base\+::failure exception if the given file cannot be opened or if an error occurs while reading from the file \\
+\hline
+{\em throw} & std\+::invalid\+\_\+argument Throws a std\+::invalid\+\_\+argument if an invalid magic string is found in the given file \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 170 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{170                                          \{}
+\DoxyCodeLine{171     std::ifstream inputStream;}
+\DoxyCodeLine{172     std::string cadena\_magica;}
+\DoxyCodeLine{173     inputStream.open(fileName);}
+\DoxyCodeLine{174     \textcolor{keywordflow}{if} (!inputStream)\{}
+\DoxyCodeLine{175         \textcolor{keywordflow}{throw} std::ios\_base::failure(std::string(\textcolor{stringliteral}{"{}void Language::load(const char fileName[])"{}}) }
+\DoxyCodeLine{176         + \textcolor{stringliteral}{"{}failed opening the file"{}});}
+\DoxyCodeLine{177     \}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179     inputStream >> cadena\_magica;}
+\DoxyCodeLine{180     \textcolor{keywordflow}{if} (cadena\_magica != MAGIC\_STRING\_T)\{}
+\DoxyCodeLine{181         \textcolor{keywordflow}{throw} std::invalid\_argument(std::string(\textcolor{stringliteral}{"{}void Language::load(const char fileName[])"{}}) }
+\DoxyCodeLine{182         + \textcolor{stringliteral}{"{}MAGIC\_STRING\_T invalid name "{}} + cadena\_magica);}
+\DoxyCodeLine{183     \}}
+\DoxyCodeLine{184     }
+\DoxyCodeLine{185     inputStream >> \_languageId;}
+\DoxyCodeLine{186     inputStream >> \_size;}
+\DoxyCodeLine{187     \textcolor{keywordflow}{if}(\_size>DIM\_VECTOR\_BIGRAM\_FREQ)\{}
+\DoxyCodeLine{188         \textcolor{keywordflow}{throw} std::out\_of\_range(std::string(\textcolor{stringliteral}{"{}void Language::load(const char fileName[])"{}}) }
+\DoxyCodeLine{189         + \textcolor{stringliteral}{"{}invalid number of Bigrams "{}} + std::to\_string(\_size));}
+\DoxyCodeLine{190     \}}
+\DoxyCodeLine{191     }
+\DoxyCodeLine{192     \textcolor{keywordtype}{int} frequency;}
+\DoxyCodeLine{193     \textcolor{keywordtype}{char} first,second;}
+\DoxyCodeLine{194     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<\_size;i++)\{}
+\DoxyCodeLine{195         inputStream >> first;}
+\DoxyCodeLine{196         inputStream >> second;}
+\DoxyCodeLine{197         inputStream >> frequency;}
+\DoxyCodeLine{198         \_vectorBigramFreq[i] = \mbox{\hyperlink{classBigramFreq}{BigramFreq}}(\mbox{\hyperlink{classBigram}{Bigram}}(first,second),frequency);}
+\DoxyCodeLine{199     \}}
+\DoxyCodeLine{200     }
+\DoxyCodeLine{201     inputStream.close(); }
+\DoxyCodeLine{202 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_a836fbfd47e33674834d3de142d015a4d}\label{classLanguage_a836fbfd47e33674834d3de142d015a4d}} 
+\index{Language@{Language}!save@{save}}
+\index{save@{save}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void Language\+::save (\begin{DoxyParamCaption}\item[{const char}]{file\+Name\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption}) const}
+
+
+
+Saves this \mbox{\hyperlink{classLanguage}{Language}} object in the given file. Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & A c-\/string with the name of the file where this \mbox{\hyperlink{classLanguage}{Language}} object will be saved. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::ios\+\_\+base\+::failure} & Throws a std\+::ios\+\_\+base\+::failure exception if the given file cannot be opened or if an error occurs while writing to the file \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 152 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{152                                               \{}
+\DoxyCodeLine{153     std::ofstream outputStream;}
+\DoxyCodeLine{154     outputStream.open(fileName);}
+\DoxyCodeLine{155     \textcolor{keywordflow}{if} (!outputStream)\{}
+\DoxyCodeLine{156         \textcolor{keywordflow}{throw} std::ios\_base::failure(std::string(\textcolor{stringliteral}{"{}void Language::save(const char fileName[]) const"{}}) }
+\DoxyCodeLine{157         + \textcolor{stringliteral}{"{}failed opening the file"{}});}
+\DoxyCodeLine{158     \}}
+\DoxyCodeLine{159     }
+\DoxyCodeLine{160     outputStream << \mbox{\hyperlink{classLanguage_ac06065988f5b735b888faecf7f6329a5}{toString}}() << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162     \textcolor{keywordflow}{if}(!outputStream)\{}
+\DoxyCodeLine{163         \textcolor{keywordflow}{throw} std::ios\_base::failure(std::string(\textcolor{stringliteral}{"{}void Language::save(const char fileName[]) const"{}}) }
+\DoxyCodeLine{164         + \textcolor{stringliteral}{"{}failed writing in the file"{}});}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167     outputStream.close();}
+\DoxyCodeLine{168 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_a6c7e6d42b7e73196237d67cc04807d08}\label{classLanguage_a6c7e6d42b7e73196237d67cc04807d08}} 
+\index{Language@{Language}!setLanguageId@{setLanguageId}}
+\index{setLanguageId@{setLanguageId}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{setLanguageId()}{setLanguageId()}}
+{\footnotesize\ttfamily void Language\+::set\+Language\+Id (\begin{DoxyParamCaption}\item[{std\+::string}]{id }\end{DoxyParamCaption})}
+
+
+
+Sets a new identifier for this language object. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The new identifier. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{44                                         \{}
+\DoxyCodeLine{45     \_languageId=id;}
+\DoxyCodeLine{46 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classLanguage_ac06065988f5b735b888faecf7f6329a5}\label{classLanguage_ac06065988f5b735b888faecf7f6329a5}} 
+\index{Language@{Language}!toString@{toString}}
+\index{toString@{toString}!Language@{Language}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string Language\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Obtains a string with the following content\+: 
+
+
+\begin{DoxyItemize}
+\item In the first line, the number of bigrams in this \mbox{\hyperlink{classLanguage}{Language}}
+\item In the following lines, each one of the pairs bigram-\/frequency (separated by a whitespace). Query method \begin{DoxyReturn}{Returns}
+A string with the number of bigrams and the list of pairs of bigram-\/frequency in the object 
+\end{DoxyReturn}
+
+\end{DoxyItemize}
+
+Definition at line 85 of file Language.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{85                                   \{}
+\DoxyCodeLine{86     std::string cad = MAGIC\_STRING\_T + \textcolor{stringliteral}{"{}\(\backslash\)n"{}} + \_languageId + \textcolor{stringliteral}{"{}\(\backslash\)n"{}} + std::to\_string(\_size);}
+\DoxyCodeLine{87     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\_size;i++)\{}
+\DoxyCodeLine{88         cad += \textcolor{stringliteral}{"{}\(\backslash\)n"{}} + \_vectorBigramFreq[i].\mbox{\hyperlink{classBigramFreq_ab795f5f5f963d0d08d5ce5f536842eae}{toString}}();}
+\DoxyCodeLine{89     \}}
+\DoxyCodeLine{90     \textcolor{keywordflow}{return} cad;}
+\DoxyCodeLine{91 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{Language_8h}{Language.\+h}}\item 
+src/\mbox{\hyperlink{Language_8cpp}{Language.\+cpp}}\end{DoxyCompactItemize}

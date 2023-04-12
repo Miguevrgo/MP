@@ -1,0 +1,98 @@
+\hypertarget{main_8cpp}{}\doxysection{src/main.cpp File Reference}
+\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include \char`\"{}Language.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a7b443382ac5a9bb8b903be8e98c82b25}{show\+English\+Help}} (std\+::ostream \&output\+Stream)
+\item 
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Silvia Acid Carrillo \href{mailto:acid@decsai.ugr.es}{\texttt{ acid@decsai.\+ugr.\+es}} 
+
+Andrés Cano Utrera \href{mailto:acu@decsai.ugr.es}{\texttt{ acu@decsai.\+ugr.\+es}} 
+
+Luis Castillo Vidal \href{mailto:L.Castillo@decsai.ugr.es}{\texttt{ L.\+Castillo@decsai.\+ugr.\+es}} 
+
+Miguel Ángel De La Vega Rodríguez \href{mailto:miguevrod@correo.ugr.es}{\texttt{ miguevrod@correo.\+ugr.\+es}}
+\end{DoxyAuthor}
+Created on 29 January 2023, 11\+:00 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+This program reads an undefined number of \mbox{\hyperlink{classLanguage}{Language}} objects from the files passed as parameters to \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main()}}. It obtains as result the union of all the input \mbox{\hyperlink{classLanguage}{Language}} objects. The result is then sorted by decreasing order of frequency and alphabetical order of bigrams when there is any tie in frequencies. Finally the resulting \mbox{\hyperlink{classLanguage}{Language}} is saved in an output file. The program must have at least an input file and an output file. The output \mbox{\hyperlink{classLanguage}{Language}} will have as language identifier, the one of the first file ($<$file1.\+bgr$>$). If an input file $<$file$\ast$.bgr$>$ has a language identifier different from the one of the first file ($<$file1.\+bgr$>$), then it will not be included in the union. Running example\+: \begin{quote}
+language2 $<$file1.\+bgr$>$ \mbox{[}$<$file2.\+bgr$>$ ... $<$filen.\+bgr$>$\mbox{]} $<$output\+File.\+bgr$>$ \end{quote}
+
+
+Definition at line 44 of file main.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{44                                  \{}
+\DoxyCodeLine{45     \textcolor{comment}{//Checks that the program has been called with at least 3 parameters}}
+\DoxyCodeLine{46     \textcolor{keywordflow}{if} (argc < 3) \{}
+\DoxyCodeLine{47         \mbox{\hyperlink{main_8cpp_a7b443382ac5a9bb8b903be8e98c82b25}{showEnglishHelp}}(std::cerr);}
+\DoxyCodeLine{48         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{49     \}}
+\DoxyCodeLine{50     \textcolor{keyword}{const} \textcolor{keywordtype}{int} MAX\_LAN=50; \textcolor{comment}{//Maximum number of Language objects}}
+\DoxyCodeLine{51     \textcolor{keywordtype}{int} num\_lan=0; \textcolor{comment}{//Number of Languages provided}}
+\DoxyCodeLine{52     \mbox{\hyperlink{classLanguage}{Language}} languages[MAX\_LAN];}
+\DoxyCodeLine{53   }
+\DoxyCodeLine{54     \textcolor{comment}{//Reads each input file, creates a Language object from it, and adds it to the array of languages}}
+\DoxyCodeLine{55     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < argc -\/ 1; i++) \{}
+\DoxyCodeLine{56         languages[i-\/1].\mbox{\hyperlink{classLanguage_af0eeaecee6e1b049f51fb506face7a67}{load}}(argv[i]);}
+\DoxyCodeLine{57         num\_lan++;}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59     }
+\DoxyCodeLine{60     \textcolor{comment}{//Creates a new Language object equal to the union of all languages}}
+\DoxyCodeLine{61     \mbox{\hyperlink{classLanguage}{Language}} unionLanguage = languages[0];}
+\DoxyCodeLine{62     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < num\_lan; i++) \{}
+\DoxyCodeLine{63         \textcolor{keywordflow}{if} (unionLanguage.\mbox{\hyperlink{classLanguage_aae8315a799767910c0bcc0ba47595081}{getLanguageId}}()==languages[i].getLanguageId())\{}
+\DoxyCodeLine{64             unionLanguage.\mbox{\hyperlink{classLanguage_ab555a6e07a99ad77d6d8061ea92f187a}{join}}(languages[i]);}
+\DoxyCodeLine{65         \}}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67     }
+\DoxyCodeLine{68     \textcolor{comment}{//Sorts the bigrams in unionLanguage}}
+\DoxyCodeLine{69     unionLanguage.\mbox{\hyperlink{classLanguage_a9e5992e8893e995e99677da8a73094b8}{sort}}();}
+\DoxyCodeLine{70     }
+\DoxyCodeLine{71     \textcolor{comment}{//Saves the resulting Language object to the output file}}
+\DoxyCodeLine{72     unionLanguage.\mbox{\hyperlink{classLanguage_a836fbfd47e33674834d3de142d015a4d}{save}}(argv[argc -\/ 1]);}
+\DoxyCodeLine{73     }
+\DoxyCodeLine{74     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{75 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{main_8cpp_a7b443382ac5a9bb8b903be8e98c82b25}\label{main_8cpp_a7b443382ac5a9bb8b903be8e98c82b25}} 
+\index{main.cpp@{main.cpp}!showEnglishHelp@{showEnglishHelp}}
+\index{showEnglishHelp@{showEnglishHelp}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{showEnglishHelp()}{showEnglishHelp()}}
+{\footnotesize\ttfamily void show\+English\+Help (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{output\+Stream }\end{DoxyParamCaption})}
+
+Shows help about the use of this program in the given output stream 
+\begin{DoxyParams}{Parameters}
+{\em ouput\+Stream} & The output stream where the help will be shown (for example, cout, cerr, etc) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 25 of file main.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{25                                                \{}
+\DoxyCodeLine{26     outputStream << \textcolor{stringliteral}{"{}Error, run with the following parameters:"{}} << std::endl;}
+\DoxyCodeLine{27     outputStream << \textcolor{stringliteral}{"{}language2 <file1.bgr> [<file2.bgr> ... <filen.bgr>] <outputFile.bgr> "{}} << std::endl;}
+\DoxyCodeLine{28 \}}
+
+\end{DoxyCode}
