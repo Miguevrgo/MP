@@ -1,4 +1,4 @@
-#!  /bin/bash
+#!/bin/bash
 # Author: Luis Castillo Vidal L.Castillo@decsai.ugr.es
 # Pass test file $1
 
@@ -197,7 +197,8 @@ then
        printf "${RED} Failed build${WHITE}\n"
         exit
 else
-BINARY=$(grep "g++[^ ]*[ \t]*-o" $MAKEOUT | sed "s/^.*-o //;s/ build.*$//")
+#BINARY=$(grep "g++[^ ]*[ \t]*-o" $MAKEOUT | sed "s/^.*-o //;s/ build.*$//")
+BINARY=$(grep "g++ .* -o dist/" $MAKEOUT | sed "s/^.*-o //;s/ build.*$//")
 printf "${GREEN}"$BINARY"${WHITE}\n"
 fi
 # Execute tests
