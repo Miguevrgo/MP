@@ -12,15 +12,16 @@
  * Created on 7 de febrero de 2023, 14:02
  */
 
+#include "Language.h"
 
 /**
  * Shows help about the use of this program in the given output stream
  * @param outputStream The output stream where the help will be shown (for example,
  * cout, cerr, etc) 
  */
-void showEnglishHelp(ostream& outputStream) {
-    outputStream << "Error, run with the following parameters:" << endl;
-    outputStream << "language3 [-t min|max] <file1.bgr> <file2.bgr> [ ... <filen.bgr>]" << endl;
+void showEnglishHelp(std::ostream& outputStream) {
+    outputStream << "Error, run with the following parameters:" << std::endl;
+    outputStream << "language3 [-t min|max] <file1.bgr> <file2.bgr> [ ... <filen.bgr>]" << std::endl;
 }
 
 /**

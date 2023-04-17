@@ -35,6 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/BIgram.o \
+	${OBJECTDIR}/src/BigramFreq.o \
 	${OBJECTDIR}/src/Language.o \
 	${OBJECTDIR}/src/main.o
 
@@ -62,6 +64,16 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/language3: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/language3 ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/src/BIgram.o: src/BIgram.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/BIgram.o src/BIgram.cpp
+
+${OBJECTDIR}/src/BigramFreq.o: src/BigramFreq.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/BigramFreq.o src/BigramFreq.cpp
 
 ${OBJECTDIR}/src/Language.o: src/Language.cpp
 	${MKDIR} -p ${OBJECTDIR}/src

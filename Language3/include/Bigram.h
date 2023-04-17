@@ -17,6 +17,9 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
+#include <fstream>
+#include <cmath> 
 
 /**
  * @class Bigram
