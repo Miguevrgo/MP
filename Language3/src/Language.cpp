@@ -14,26 +14,6 @@
 
 #include "Language.h"
 
-const std::string Language::MAGIC_STRING_T="MP-LANGUAGE-T-1.0";
+using namespace std;
 
-Language::Language(): _languageId("unknown"),_size(0){}
-
-Language::Language(int numberBigrams){
-    if(numberBigrams>DIM_VECTOR_BIGRAM_FREQ){
-        throw std::out_of_range(std::string("Language::Language(int numberBigrams)") +
-         "invalid number of bigrams" + std::to_string(numberBigrams));
-    }
-    else{
-        _languageId="unknown";
-        _size=numberBigrams;
-    }
-   
-}
-
-const std::string& Language::getLanguageId() const{
-    return _languageId;
-}
-
-void Language::setLanguageId(std::string id){
-    _languageId=id;
-}
+const string Language::MAGIC_STRING_T="MP-LANGUAGE-T-1.0";
