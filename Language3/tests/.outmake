@@ -1,0 +1,24 @@
+"make" -f nbproject/Makefile-Debug.mk QMAKE= SUBPROJECTS= .clean-conf
+make[1]: se entra en el directorio '/home/miguevr/GitHub/MP/Language3'
+rm -f -r build/Debug
+make[1]: se sale del directorio '/home/miguevr/GitHub/MP/Language3'
+"make" -f nbproject/Makefile-Debug.mk QMAKE= SUBPROJECTS= .build-conf
+make[1]: se entra en el directorio '/home/miguevr/GitHub/MP/Language3'
+"make"  -f nbproject/Makefile-Debug.mk dist/Debug/GNU-Linux/language3
+make[2]: se entra en el directorio '/home/miguevr/GitHub/MP/Language3'
+mkdir -p build/Debug/GNU-Linux/src
+rm -f "build/Debug/GNU-Linux/src/BIgram.o.d"
+g++    -c -g -Iinclude -std=c++14 -MMD -MP -MF "build/Debug/GNU-Linux/src/BIgram.o.d" -o build/Debug/GNU-Linux/src/BIgram.o src/BIgram.cpp
+mkdir -p build/Debug/GNU-Linux/src
+rm -f "build/Debug/GNU-Linux/src/BigramFreq.o.d"
+g++    -c -g -Iinclude -std=c++14 -MMD -MP -MF "build/Debug/GNU-Linux/src/BigramFreq.o.d" -o build/Debug/GNU-Linux/src/BigramFreq.o src/BigramFreq.cpp
+mkdir -p build/Debug/GNU-Linux/src
+rm -f "build/Debug/GNU-Linux/src/Language.o.d"
+g++    -c -g -Iinclude -std=c++14 -MMD -MP -MF "build/Debug/GNU-Linux/src/Language.o.d" -o build/Debug/GNU-Linux/src/Language.o src/Language.cpp
+mkdir -p build/Debug/GNU-Linux/src
+rm -f "build/Debug/GNU-Linux/src/main.o.d"
+g++    -c -g -Iinclude -std=c++14 -MMD -MP -MF "build/Debug/GNU-Linux/src/main.o.d" -o build/Debug/GNU-Linux/src/main.o src/main.cpp
+mkdir -p dist/Debug/GNU-Linux
+g++     -o dist/Debug/GNU-Linux/language3 build/Debug/GNU-Linux/src/BIgram.o build/Debug/GNU-Linux/src/BigramFreq.o build/Debug/GNU-Linux/src/Language.o build/Debug/GNU-Linux/src/main.o 
+make[2]: se sale del directorio '/home/miguevr/GitHub/MP/Language3'
+make[1]: se sale del directorio '/home/miguevr/GitHub/MP/Language3'

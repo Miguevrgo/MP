@@ -14,6 +14,7 @@
 
 #include "Language.h"
 
+
 /**
  * Shows help about the use of this program in the given output stream
  * @param outputStream The output stream where the help will be shown (for example,
@@ -46,12 +47,12 @@ int main(int argc, char* argv[]) {
     const int MAX_LAN=50; //Maximum number of Language objects
     int num_lan=0; //Number of Languages provided
     Language languages[MAX_LAN];
-  
     //Reads each input file, creates a Language object from it, and adds it to the array of languages
     for (int i = 1; i < argc ; i++) {
         languages[i-1].load(argv[i]);
         num_lan++;
     }
+
     double distancia=languages[0].getDistance(languages[1]);
     std::cout << distancia;
     

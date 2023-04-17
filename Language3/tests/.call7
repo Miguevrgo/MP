@@ -1,0 +1,1 @@
+Test #7 [tests//5_fortunata_2languages.test] valgrind --leak-check=full  dist/Debug/GNU-Linux/language3  ../Books/fortunata.bgr ../Books/quijote.bgr ../Books/fortunata.bgr

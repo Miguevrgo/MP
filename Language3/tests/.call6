@@ -1,0 +1,1 @@
+Test #6 [tests//4_prep_xx-4languages.test] valgrind --leak-check=full  dist/Debug/GNU-Linux/language3  -t max ../Books/prep_xx.bgr ../Books/prep_en.bgr ../Books/prep_fr.bgr ../Books/prep_sp.bgr ../Books/prep_ge.bgr

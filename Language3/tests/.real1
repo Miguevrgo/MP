@@ -1,0 +1,4 @@
+%%%OUTPUT
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  double Language::getDistance(const Language& otherLanguage) constthis language is empty (_size=0)
+Aborted (core dumped)

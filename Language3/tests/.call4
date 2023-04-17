@@ -1,0 +1,1 @@
+Test #4 [tests//2.RunWithInvalidArguments_2.test] valgrind --leak-check=full  dist/Debug/GNU-Linux/language3   -t MIN 30bigrams.bgr 30bigrams.bgr

@@ -1,0 +1,1 @@
+Test #5 [tests//3_quijote-4languages.test] valgrind --leak-check=full  dist/Debug/GNU-Linux/language3  ../Books/quijote.bgr ../Books/fortunata.bgr ../Books/aliceWonder.bgr ../Books/lesMiserables.bgr ../Books/BodasdeSangre_FedericoGarciaLorca.bgr
