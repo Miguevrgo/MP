@@ -18,8 +18,6 @@
 
 const std::string Language::MAGIC_STRING_T="MP-LANGUAGE-T-1.0";
 
-const std::string Language::MAGIC_STRING_T="MP-LANGUAGE-T-1.0";
-
 Language::Language(): _languageId("unknown"),_size(0){}
 
 Language::Language(int numberBigrams){
@@ -67,18 +65,21 @@ int Language::getSize() const{
 }
 
 double Language::getDistance(const Language& otherLanguage) const{
-    throw std::invalid_argument(std::string("double Language::getDistance(const Language& otherLanguage) const") +
-    "this language is empty (_size=0)" );
+    if(_size==0){
+        throw std::invalid_argument(std::string("double Language::getDistance(const Language& otherLanguage) const") +
+            "this language is empty (_size=0)" );
+    }
+    
     double sum=0;
     for(int i=0;i<_size;i++){
         if(otherLanguage.findBigram(_vectorBigramFreq[i].getBigram())==-1){
-            sum += fabs()
+            sum += fabs(i-_size);
         }
         else{
-
+            sum += fabs(i-otherLanguage.findBigram(_vectorBigramFreq[i].getBigram()));
         }
     }
-    return (sum/);
+    return (sum/pow(_size,2));
 }
 
 int Language::findBigram(const Bigram& bigram) const{
