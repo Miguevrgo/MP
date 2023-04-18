@@ -42,18 +42,41 @@ void showEnglishHelp(std::ostream& outputStream) {
  */
 int main(int argc, char* argv[]) {
 
-    //CAMBIAR TODO ESTO,SOLO ES PARA HACER TESTS 
-
-    const int MAX_LAN=50; //Maximum number of Language objects
-    int num_lan=0; //Number of Languages provided
-    Language languages[MAX_LAN];
-    //Reads each input file, creates a Language object from it, and adds it to the array of languages
-    for (int i = 1; i < argc ; i++) {
-        languages[i-1].load(argv[i]);
-        num_lan++;
+    //Checks that the program has been called with at least 3 parameters
+    if (argc < 3 ) {
+        showEnglishHelp(std::cerr);
+        return 1;
     }
 
-    double distancia=languages[0].getDistance(languages[1]);
-    std::cout << distancia;
+    //Creates the language used as a reference
+    Language ref_language;
+    ref_language.load(argv[1]);
+   
+    //Creates dynamic language array
+    Language* languages=nullptr;
+    languages = new Language[argc-2];
     
+    //Loads each language into the array
+    for (int i=2;i<argc;i++){
+        languages[i-2].load(argv[i]);
+    }
+    
+    //Prints distance between texts and calculates nearest
+    double min_dist=100;
+    double distance;
+    int min_index;
+    for (int i = 0; i < argc-2; i++) {
+        distance = ref_language.getDistance(languages[i]);
+        if(distance < min_dist){
+            min_dist=distance;
+            min_index=i;
+        }
+        std::cout << "Distance to " << argv[i+2] << ": " << distance << std::endl;
+    }
+
+    std::cout << "Nearest language file: " << argv[min_index+2] << std::endl;
+    std::cout << "Identifier of the nearest language: " << languages[min_index].getLanguageId() << std::endl;
+    
+    delete[] languages;
+    return 0;
 }
