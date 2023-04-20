@@ -8,6 +8,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/miguevr/GitHub/MP/Language3/include/Bigram.h</file>
+            <file>file:/home/miguevr/GitHub/MP/Language3/tests/4_prep_xx-4languages.test</file>
+            <file>file:/home/miguevr/GitHub/MP/Language3/tests/2.RunWithInvalidArguments_2.test</file>
             <file>file:/home/miguevr/GitHub/MP/Language3/src/BigramFreq.cpp</file>
             <file>file:/home/miguevr/GitHub/MP/Language3/include/Language.h</file>
             <file>file:/home/miguevr/GitHub/MP/Language3/tests/3_quijote-4languages.test</file>
