@@ -123,6 +123,8 @@ int main(int argc, char* argv[]) {
     std::cout << "Identifier of the " << max_min << " language: " 
               << languages[min_max_index].getLanguageId() << std::endl;
     
+    //Delete dynamic array
     delete[] languages;
+    
     return 0;
 }
