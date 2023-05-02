@@ -15,7 +15,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>src/Bigram.c++</itemPath>
       <itemPath>src/Bigram.cpp</itemPath>
       <itemPath>src/BigramFreq.cpp</itemPath>
       <itemPath>src/Language.cpp</itemPath>
@@ -55,8 +54,6 @@
       </item>
       <item path="include/Language.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/Bigram.c++" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/Bigram.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/BigramFreq.cpp" ex="false" tool="1" flavor2="0">
@@ -92,8 +89,6 @@
       <item path="include/BigramFreq.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Language.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/Bigram.c++" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Bigram.cpp" ex="false" tool="1" flavor2="0">
       </item>

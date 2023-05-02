@@ -15,8 +15,6 @@
 #ifndef BIGRAM_FREQ_H
 #define BIGRAM_FREQ_H
 
-#include <string>
-
 #include "Bigram.h"
 
 /**
@@ -30,7 +28,7 @@ public:
      * @brief Base constructor. It builds a BigramFreq object with "__" as 
      * the text of the bigram and 0 as the frequency
      */
-    BigramFreq();
+    BigramFreq(Bigram bigram=Bigram(),int frequency=0);
 
     /**
      * @brief Gets a const reference to the Bigram of this BigramFreq object
