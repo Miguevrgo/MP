@@ -29,6 +29,7 @@ Language::Language(int numberBigrams){
     else{
         _languageId="unknown";
         _size=numberBigrams;
+        _vectorBigramFreq = new BigramFreq
     }
    
 }
