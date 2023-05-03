@@ -19,7 +19,9 @@
 
 const std::string Language::MAGIC_STRING_T="MP-LANGUAGE-T-1.0";
 
-Language::Language(): _languageId("unknown"),_size(0){}
+Language::Language(): _languageId("unknown"),_size(0){
+    _vectorBigramFreq = new BigramFreq[_size];
+}
 
 Language::Language(int numberBigrams){
     if(numberBigrams<0){
@@ -29,7 +31,7 @@ Language::Language(int numberBigrams){
     else{
         _languageId="unknown";
         _size=numberBigrams;
-        _vectorBigramFreq = new BigramFreq
+        _vectorBigramFreq = new BigramFreq[_size];
     }
    
 }
@@ -229,6 +231,8 @@ void Language::load(const char fileName[]) {
     
     inputStream >> _languageId;
     inputStream >> _size;
+    //Here a resizing is probably needed to create a new dynamic memory array 
+    //with the size provided by the file
     if(_size<0){
         throw std::out_of_range(std::string("void Language::load(const char fileName[])") 
         + "invalid number of Bigrams " + std::to_string(_size));
@@ -248,6 +252,8 @@ void Language::load(const char fileName[]) {
 
 void Language::append(const BigramFreq& bigramFreq){
     if(findBigram(bigramFreq.getBigram())==-1){
+        //Here a resizing is probably needed to create a new dynamic memory array 
+        //with the new element of the array
         _vectorBigramFreq[_size]=bigramFreq;
         _size++;
         
@@ -255,7 +261,7 @@ void Language::append(const BigramFreq& bigramFreq){
     else{
         int pos=findBigram(bigramFreq.getBigram());
         //We could have used an auxiliary method to increment the frequency, however, i find
-        //this implementation better to avoid creating unncecesary methods
+        //this implementation better to avoid creating unnececesary methods
         _vectorBigramFreq[pos]
         .setFrequency(_vectorBigramFreq[pos].getFrequency()+bigramFreq.getFrequency());        
     }
