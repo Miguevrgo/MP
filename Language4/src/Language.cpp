@@ -16,10 +16,11 @@
 
 #include "Language.h"
 
-
 const std::string Language::MAGIC_STRING_T="MP-LANGUAGE-T-1.0";
 
-Language::Language(): _languageId("unknown"),_size(0){}
+Language::Language(): _languageId("unknown"){
+    allocate(0);
+}
 
 Language::Language(int numberBigrams){
     if(numberBigrams<0){
