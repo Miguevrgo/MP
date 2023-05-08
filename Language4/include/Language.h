@@ -209,6 +209,12 @@ private:
     BigramFreq* _vectorBigramFreq; ///< Dynamic array of BigramFreq
     int _size; ///< Number of elements in _vectorBigramFreq
     static const std::string MAGIC_STRING_T; ///< A const string with the magic string for text files
+
+    /**
+     * @brief Auxiliar method used to resize Dynamic array of BigramFreq
+     * @param new_size New size for the dynamic array
+     */
+    void resize(int new_size);
 };
 
 #endif /* LANGUAGE_H */

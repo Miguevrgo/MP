@@ -19,9 +19,7 @@
 
 const std::string Language::MAGIC_STRING_T="MP-LANGUAGE-T-1.0";
 
-Language::Language(): _languageId("unknown"),_size(0){
-    _vectorBigramFreq = new BigramFreq[_size];
-}
+Language::Language(): _languageId("unknown"),_size(0){}
 
 Language::Language(int numberBigrams){
     if(numberBigrams<0){
@@ -107,13 +105,13 @@ double Language::getDistance(const Language& otherLanguage) const{
     double sum=0;
     for(int i=0;i<_size;i++){
         if(otherLanguage.findBigram(_vectorBigramFreq[i].getBigram())==-1){
-            sum += fabs(i-_size);
+            sum += std::fabs(i-_size);
         }
         else{
-            sum += fabs(i-otherLanguage.findBigram(_vectorBigramFreq[i].getBigram()));
+            sum += std::fabs(i-otherLanguage.findBigram(_vectorBigramFreq[i].getBigram()));
         }
     }
-    return (sum/pow(_size,2));
+    return (sum/std::pow(_size,2));
 }
 
 int Language::findBigram(const Bigram& bigram) const{
@@ -231,12 +229,8 @@ void Language::load(const char fileName[]) {
     
     inputStream >> _languageId;
     inputStream >> _size;
-    //Here a resizing is probably needed to create a new dynamic memory array 
-    //with the size provided by the file
-    if(_size<0){
-        throw std::out_of_range(std::string("void Language::load(const char fileName[])") 
-        + "invalid number of Bigrams " + std::to_string(_size));
-    }
+    
+    _vectorBigramFreq = new BigramFreq[_size];
     
     int frequency;
     char first,second;
@@ -252,10 +246,8 @@ void Language::load(const char fileName[]) {
 
 void Language::append(const BigramFreq& bigramFreq){
     if(findBigram(bigramFreq.getBigram())==-1){
-        //Here a resizing is probably needed to create a new dynamic memory array 
-        //with the new element of the array
+        resize(_size+1);
         _vectorBigramFreq[_size]=bigramFreq;
-        _size++;
         
     }
     else{
@@ -272,3 +264,19 @@ void Language::join(const Language& language){
         append(language.at(i));
     }
 }
+
+void Language::resize(int new_size){
+        if (new_size<0){
+            throw std::out_of_range(std::string("void Language::resize(int new_size)")+" Invalid new size ( <0 )");
+        }
+
+        BigramFreq *resized_v = new BigramFreq[new_size];
+        for (int i=0;i<_size;i++){
+            resized_v[i]=_vectorBigramFreq[i];
+        }
+
+        delete [] _vectorBigramFreq;
+
+        _vectorBigramFreq = resized_v;
+        _size = new_size;
+    }
