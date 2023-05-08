@@ -28,16 +28,14 @@ Language::Language(int numberBigrams){
     }
     else{
         _languageId="unknown";
-        _size=numberBigrams;
-        _vectorBigramFreq = new BigramFreq[_size];
+        allocate(numberBigrams);
     }
    
 }
 
 Language::Language(const Language& orig){
-    _languageId = orig._languageId;
-    _size = orig._size;
-    _vectorBigramFreq = new BigramFreq[_size];
+    this->allocate(orig.getSize());
+    this->_vectorBigramFreq = new BigramFreq[_size];
     for (int i=0;i<_size;i++){
         _vectorBigramFreq[i] = orig._vectorBigramFreq[i];
     }
@@ -49,10 +47,11 @@ Language::~Language(){
 
 Language& Language::operator=(const Language& orig){
     if (this!=&orig){
-        _size=orig._size;
-        _languageId=orig._languageId;
+        this->deallocate();
+        this->allocate(orig.getSize());
+        this->_languageId=orig._languageId;
         for (int i=0;i<_size;i++){
-            _vectorBigramFreq[i]=orig._vectorBigramFreq[i];
+            this->_vectorBigramFreq[i]=orig._vectorBigramFreq[i];
         }
     }
     /*
@@ -65,11 +64,11 @@ Language& Language::operator=(const Language& orig){
 }
 
 const std::string& Language::getLanguageId() const{
-    return _languageId;
+    return this->_languageId;
 }
 
 void Language::setLanguageId(const std::string& id){
-    _languageId=id;
+    this->_languageId=id;
 }
 
 const BigramFreq& Language::at(int index) const{
@@ -78,7 +77,7 @@ const BigramFreq& Language::at(int index) const{
          "invalid position" + std::to_string(index));
     }
     else{
-        return _vectorBigramFreq[index];
+        return this->_vectorBigramFreq[index];
     }
 }
 
@@ -88,7 +87,7 @@ BigramFreq& Language::at(int index){
          "invalid position" + std::to_string(index));
     }
     else{
-        return _vectorBigramFreq[index];
+        return this->_vectorBigramFreq[index];
     }
 }
 
@@ -104,11 +103,11 @@ double Language::getDistance(const Language& otherLanguage) const{
     
     double sum=0;
     for(int i=0;i<_size;i++){
-        if(otherLanguage.findBigram(_vectorBigramFreq[i].getBigram())==-1){
+        if(otherLanguage.findBigram(this->_vectorBigramFreq[i].getBigram())==-1){
             sum += std::fabs(i-_size);
         }
         else{
-            sum += std::fabs(i-otherLanguage.findBigram(_vectorBigramFreq[i].getBigram()));
+            sum += std::fabs(i-otherLanguage.findBigram(this->_vectorBigramFreq[i].getBigram()));
         }
     }
     return (sum/std::pow(_size,2));
@@ -118,7 +117,7 @@ int Language::findBigram(const Bigram& bigram) const{
     bool found=false;
     int pos=0;
     for (int i=0;i<_size;i++){
-        if (bigram.getText() == _vectorBigramFreq[i].getBigram().getText()){
+        if (bigram.getText() == this->_vectorBigramFreq[i].getBigram().getText()){
             found=true;
             pos=i;
         }
@@ -130,7 +129,7 @@ int Language::findBigram(const Bigram& bigram) const{
 std::string Language::toString() const{
     std::string cad = MAGIC_STRING_T + "\n" + _languageId + "\n" + std::to_string(_size);
     for (int i=0;i<_size;i++){
-        cad += "\n" + _vectorBigramFreq[i].toString();
+        cad += "\n" + this->_vectorBigramFreq[i].toString();
     }
     return cad;
 }
@@ -191,7 +190,7 @@ void quickSort(BigramFreq array[], int nElements, int start, int end){
 }
 
 void Language::sort(){
-    quickSort(_vectorBigramFreq,_size,0,_size-1);
+    quickSort(this->_vectorBigramFreq,_size,0,_size-1);
 }
 
 void Language::save(const char fileName[]) const{
@@ -227,10 +226,10 @@ void Language::load(const char fileName[]) {
         + "MAGIC_STRING_T invalid name " + cadena_magica);
     }
     
-    inputStream >> _languageId;
-    inputStream >> _size;
+    inputStream >> this->_languageId;
+    inputStream >> this->_size;
     
-    _vectorBigramFreq = new BigramFreq[_size];
+    allocate(_size);
     
     int frequency;
     char first,second;
@@ -238,7 +237,7 @@ void Language::load(const char fileName[]) {
         inputStream >> first;
         inputStream >> second;
         inputStream >> frequency;
-        _vectorBigramFreq[i] = BigramFreq(Bigram(first,second),frequency);
+        this->_vectorBigramFreq[i] = BigramFreq(Bigram(first,second),frequency);
     }
     
     inputStream.close(); 
@@ -246,15 +245,15 @@ void Language::load(const char fileName[]) {
 
 void Language::append(const BigramFreq& bigramFreq){
     if(findBigram(bigramFreq.getBigram())==-1){
-        resize(_size+1);
-        _vectorBigramFreq[_size]=bigramFreq;
+        reallocate(_size+1);
+        this->_vectorBigramFreq[_size]=bigramFreq;
         
     }
     else{
         int pos=findBigram(bigramFreq.getBigram());
         //We could have used an auxiliary method to increment the frequency, however, i find
         //this implementation better to avoid creating unnececesary methods
-        _vectorBigramFreq[pos]
+        this->_vectorBigramFreq[pos]
         .setFrequency(_vectorBigramFreq[pos].getFrequency()+bigramFreq.getFrequency());        
     }
 }
@@ -265,18 +264,44 @@ void Language::join(const Language& language){
     }
 }
 
-void Language::resize(int new_size){
-        if (new_size<0){
-            throw std::out_of_range(std::string("void Language::resize(int new_size)")+" Invalid new size ( <0 )");
-        }
+void Language::allocate(int n_elements){
+    // if (new_size<0){
+    //     throw std::out_of_range(std::string("void Language::resize(int new_size)")+" Invalid new size ( <0 )");
+    // }
+    if (n_elements>0){
+        this->_vectorBigramFreq = new BigramFreq[n_elements];
+        this->_size=n_elements;
+    }
+    else{
+        _vectorBigramFreq = nullptr;
+        _size=0;
+    }
+        
+}
 
+void Language::deallocate(){
+    delete [] this->_vectorBigramFreq;
+    _vectorBigramFreq = nullptr;
+    this->_size = 0;
+}
+
+void Language::reallocate(int new_size){
+    // if (new_size<0){
+    //     throw std::out_of_range(std::string("void Language::resize(int new_size)")+" Invalid new size ( <0 )");
+    // }
+    if (new_size>0){
         BigramFreq *resized_v = new BigramFreq[new_size];
         for (int i=0;i<_size;i++){
-            resized_v[i]=_vectorBigramFreq[i];
+            resized_v[i]=this->_vectorBigramFreq[i];
         }
 
-        delete [] _vectorBigramFreq;
+        delete [] this->_vectorBigramFreq;
 
-        _vectorBigramFreq = resized_v;
-        _size = new_size;
+        this->_vectorBigramFreq = resized_v;
+        this->_size = new_size;
     }
+    else{
+        _vectorBigramFreq = nullptr;
+        _size=0;
+    }
+}

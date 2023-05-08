@@ -214,7 +214,9 @@ private:
      * @brief Auxiliar method used to resize Dynamic array of BigramFreq
      * @param new_size New size for the dynamic array
      */
-    void resize(int new_size);
+    void allocate(int n_elements);
+    void deallocate();
+    void reallocate(int new_size);
 };
 
 #endif /* LANGUAGE_H */
