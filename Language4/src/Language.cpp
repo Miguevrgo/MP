@@ -36,7 +36,7 @@ Language::Language(int numberBigrams){
 
 Language::Language(const Language& orig){
     this->allocate(orig.getSize());
-    this->_vectorBigramFreq = new BigramFreq[_size];
+    this->_languageId=orig._languageId;
     for (int i=0;i<_size;i++){
         _vectorBigramFreq[i] = orig._vectorBigramFreq[i];
     }
