@@ -164,6 +164,8 @@ private:
      * @return A reference to the element at the given position
      */
     int& operator()(int row, int column);
+
+    void allocate(int n_elements);
 };
 
 #endif /* BIGRAM_COUNTER_H */
