@@ -201,7 +201,14 @@ public:
      * @param index index of the element. Input parameter
      * @return A reference to the BigramFreq object at position @p index
      */
-    BigramFreq operator[](int index);
+    BigramFreq& operator[](int index);
+
+    /**
+     * @brief Overloading of the [] operator for Language class
+     * @param index index of the element. Input parameter
+     * @return A const reference to the BigramFreq object at position @p index
+     */
+    const BigramFreq& operator[](int index) const;
 
     /**
      * @brief Overloading of the += operator with a Language parameter. 
@@ -212,7 +219,7 @@ public:
      * @param language A Language object. Input parameter
      * @return A reference to this object.
      */
-    Language operator+=(Language language);
+    Language& operator+=(Language language);
       
 private:
     std::string _languageId; ///< language identifier
@@ -235,7 +242,7 @@ private:
  * @param language the Language object. Input parameter
  * @return @p os A reference to the output stream
  */
-std::ostream operator<<(std::ostream os, Language language);
+std::ostream& operator<<(std::ostream &os, const Language &language);
 
 /**
  * @brief Overloading of the stream extraction operator for Language class
@@ -245,6 +252,6 @@ std::ostream operator<<(std::ostream os, Language language);
  * @param language the Language object. Output parameter
  * @return @p is A reference to the input stream
  */
-std::istream operator>>(std::istream is, Language language);
+std::istream& operator>>(std::istream &is,const Language &language);
 
 #endif /* LANGUAGE_H */

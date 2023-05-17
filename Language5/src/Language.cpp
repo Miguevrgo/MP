@@ -259,8 +259,9 @@ void Language::append(const BigramFreq& bigramFreq){
     }
 }
 
-BigramFreq Language::operator[](int index){}
-Language Language::operator+=(Language language){}
+BigramFreq& Language::operator[](int index){}
+const BigramFreq& Language::operator[](int index) const{}
+Language& Language::operator+=(Language language){}
 
 
 
@@ -307,5 +308,5 @@ void Language::reallocate(int new_size){
 }
 
 
-std::ostream operator<<(std::ostream os, Language language){}
-std::istream operator>>(std::istream is, Language language){}
+std::ostream& operator<<(std::ostream &os,const Language &language){}
+std::istream& operator>>(std::istream &is,const Language &language){}
