@@ -219,7 +219,7 @@ public:
      * @param language A Language object. Input parameter
      * @return A reference to this object.
      */
-    Language& operator+=(Language language);
+    Language& operator+=(const Language &language);
       
 private:
     std::string _languageId; ///< language identifier

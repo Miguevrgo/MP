@@ -52,9 +52,35 @@ BigramCounter::~BigramCounter(){
     _frequency=nullptr;
 }
 
-int BigramCounter::getNumberActiveBigrams() const{}
-bool BigramCounter::setFrequency(const Bigram &bigram, int frequency){}
-void BigramCounter::increaseFrequency(const Bigram &bigram, int frequency){}
+int BigramCounter::getNumberActiveBigrams() const{
+    unsigned int length = _validCharacters.length();
+    unsigned int counter = 0;
+    for (int i=0;i<length;i++){
+        for (int j=0;j<length;j++){
+            if (_frequency[i][j] > 0){
+                counter++;
+            }
+        }
+    }
+    return counter;
+}
+
+bool BigramCounter::setFrequency(const Bigram &bigram, int frequency){
+    int pos = findBigramPos(bigram);
+    bool found = false;
+    if (pos!=-1){
+        this->_frequency[pos/10][pos%10]=frequency;
+        found = true;
+    }
+    return (found);
+}
+
+void BigramCounter::increaseFrequency(const Bigram &bigram, int frequency){
+    int pos = findBigramPos(bigram);
+    if (pos!=-1){
+        this->_frequency[pos/10][pos%10]++;
+    }
+}
 BigramCounter& BigramCounter::operator=(const BigramCounter &orig){}
 BigramCounter& BigramCounter::operator+=(const BigramCounter &rhs){}
 void BigramCounter::calculateFrequencies(const char *const fileName){}
@@ -74,4 +100,24 @@ void BigramCounter::allocate(int n_elements){
     for (int i=1;i<n_elements;++i){
         _frequency[i]=_frequency[i-1]+n_elements;
     }
+}
+
+int BigramCounter::findBigramPos(const Bigram &bigram) const{
+    int pos;
+    bool found_x = false;
+    bool found_y = false; 
+    for (int i=0;i<_validCharacters.length();i++){
+        if (_validCharacters[i]==bigram.getText().at(0)){
+            pos += i*10;
+            found_x = true;
+        }
+        if (_validCharacters[i]==bigram.getText().at(1)){
+            pos += i;
+            found_y = true;
+        }
+    }
+    if (!(found_x && found_y)){
+        pos=-1;
+    }
+    return pos;
 }

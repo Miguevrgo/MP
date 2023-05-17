@@ -259,9 +259,26 @@ void Language::append(const BigramFreq& bigramFreq){
     }
 }
 
-BigramFreq& Language::operator[](int index){}
-const BigramFreq& Language::operator[](int index) const{}
-Language& Language::operator+=(Language language){}
+BigramFreq& Language::operator[](int index){
+    if (index<0){
+        std::cerr << "Index provided is lower than 0" << std::endl;
+    }
+    return _vectorBigramFreq[index];
+}
+
+const BigramFreq& Language::operator[](int index) const{
+    if (index<0){
+        std::cerr << "Index provided is lower than 0" << std::endl;
+    }
+    return _vectorBigramFreq[index];
+}
+
+Language& Language::operator+=(const Language &language){
+    for (int i=0;i<language.getSize();i++){
+        append(language.at(i));
+    }
+    return *this;
+}
 
 
 

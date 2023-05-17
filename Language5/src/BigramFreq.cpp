@@ -48,11 +48,77 @@ std::string BigramFreq::toString() const{
 void BigramFreq::serialize(std::ostream& outputStream){}
 void BigramFreq::deserialize(std::istream& inputSstream){}
 
-std::ostream operator<<(std::ostream os, BigramFreq bigramFreq){}
-std::istream operator>>(std::istream is, BigramFreq bigramFreq){}
-bool operator>(BigramFreq bigramFreq1, BigramFreq bigramFreq2){}
-bool operator<(BigramFreq bigramFreq1, BigramFreq bigramFreq2){}
-bool operator==(BigramFreq bigramFreq1, BigramFreq bigramFreq2){}
-bool operator!=(BigramFreq bigramFreq1, BigramFreq bigramFreq2){}
-bool operator<=(BigramFreq&bigramFreq1, BigramFreq bigramFreq2){}
-bool operator>=(BigramFreq bigramFreq1, BigramFreq bigramFreq2){}
+std::ostream operator<<(std::ostream os,const BigramFreq& bigramFreq){}
+std::istream operator>>(std::istream is,const BigramFreq& bigramFreq){}
+
+bool operator>(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
+    bool greater = false;
+
+    if (bigramFreq1.getFrequency() > bigramFreq2.getFrequency()){
+        greater = true;
+    }
+    else if (bigramFreq1.getFrequency() == bigramFreq2.getFrequency()){
+        if (bigramFreq1.getBigram().getText().compare(bigramFreq2.getBigram().getText()) > 0){
+            greater = true;
+        }
+    }
+
+    return greater;
+}
+bool operator<(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
+    bool smaller = false;
+
+    if (bigramFreq1.getFrequency() < bigramFreq2.getFrequency()){
+        smaller = true;
+    }
+    else if (bigramFreq1.getFrequency() == bigramFreq2.getFrequency()){
+        if (bigramFreq1.getBigram().getText().compare(bigramFreq2.getBigram().getText()) < 0){
+            smaller = true;
+        }
+    }
+
+    return smaller;
+}
+bool operator==(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
+    bool equal = false;
+
+    if (bigramFreq1.getFrequency() == bigramFreq2.getFrequency()){
+        if (bigramFreq1.getBigram().getText().compare(bigramFreq2.getBigram().getText()) == 0){
+            equal = true;
+        }
+    }
+
+    return equal;
+}
+
+bool operator!=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
+    bool nequal = true;
+
+    if (bigramFreq1.getFrequency() == bigramFreq2.getFrequency()){
+        if (bigramFreq1.getBigram().getText().compare(bigramFreq2.getBigram().getText()) == 0){
+            nequal = false;
+        }
+    }
+
+    return nequal;
+}
+
+bool operator<=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
+    bool smaller_eq = false;
+
+    if (bigramFreq1.getFrequency() <= bigramFreq2.getFrequency()){
+        smaller_eq = true;
+    }
+
+    return smaller_eq;
+}
+
+bool operator>=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
+    bool greater_eq = false;
+
+    if (bigramFreq1.getFrequency() >= bigramFreq2.getFrequency()){
+        greater_eq = true;
+    }
+
+    return greater_eq;
+}

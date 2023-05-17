@@ -166,6 +166,14 @@ private:
     int& operator()(int row, int column);
 
     void allocate(int n_elements);
+    /**
+     * @brief Provides location of a certain bigram in the matrix
+     * Query method
+     * @param bigram Bigram to be found. Input parameter
+     * @return Position of the bigram in the matrix
+     * PRE-CONDITION Number of valid characters < 99 
+     */
+    int findBigramPos(const Bigram &bigram) const;
 };
 
 #endif /* BIGRAM_COUNTER_H */
