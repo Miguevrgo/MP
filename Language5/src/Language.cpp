@@ -116,7 +116,7 @@ double Language::getDistance(const Language& otherLanguage) const{
 
 int Language::findBigram(const Bigram& bigram) const{
     bool found=false;
-    int pos=0;
+    unsigned int pos=0;
     for (unsigned int i=0;i<_size;i++){
         if (bigram.getText() == this->_vectorBigramFreq[i].getBigram().getText()){
             found=true;
@@ -232,9 +232,9 @@ void Language::load(const char fileName[]) {
     
     allocate(_size);
     
-    int frequency;
+    unsigned int frequency;
     char first,second;
-    for(int i=0;i<_size;i++){
+    for(unsigned int i=0;i<_size;i++){
         inputStream >> first;
         inputStream >> second;
         inputStream >> frequency;
@@ -309,7 +309,7 @@ void Language::reallocate(int new_size){
     // }
     if (new_size>0){
         BigramFreq *resized_v = new BigramFreq[new_size];
-        for (int i=0;i<_size;i++){
+        for (unsigned int i=0;i<_size;i++){
             resized_v[i]=this->_vectorBigramFreq[i];
         }
 

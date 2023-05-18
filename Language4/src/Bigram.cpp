@@ -14,7 +14,6 @@
 
 #include "Bigram.h"
 
-
 Bigram::Bigram(const std::string& text) {
     if (text.length() == 2){
         strcpy (_text, text.c_str());

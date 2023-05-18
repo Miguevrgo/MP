@@ -62,7 +62,7 @@ char &Bigram::at(int index){
 }
 
 void Bigram::toUpper(){
-    for (int i=0;i<2;i++){
+    for (unsigned short int i=0;i<2;i++){
         _text[i] = toupper(_text[i]);
     }
     
