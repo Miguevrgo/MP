@@ -166,6 +166,8 @@ private:
     int& operator()(int row, int column);
 
     void allocate(int n_elements);
+    void deallocate();
+
     /**
      * @brief Provides location of a certain bigram in the matrix
      * Query method

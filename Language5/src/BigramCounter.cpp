@@ -47,9 +47,7 @@ BigramCounter::BigramCounter(const BigramCounter &orig){
 }
 
 BigramCounter::~BigramCounter(){
-    delete [] _frequency[0];
-    delete [] _frequency;
-    _frequency=nullptr;
+    deallocate();
 }
 
 int BigramCounter::getNumberActiveBigrams() const{
@@ -81,8 +79,37 @@ void BigramCounter::increaseFrequency(const Bigram &bigram, int frequency){
         this->_frequency[pos/10][pos%10]++;
     }
 }
-BigramCounter& BigramCounter::operator=(const BigramCounter &orig){}
-BigramCounter& BigramCounter::operator+=(const BigramCounter &rhs){}
+
+BigramCounter& BigramCounter::operator=(const BigramCounter &orig){
+    if (this!=&orig){
+        this->deallocate();
+        this->allocate(orig.getSize());
+        this->_validCharacters = orig._validCharacters;
+        for (int i=0;i<orig.getSize();i++){
+            for (int j=0;j<orig.getSize();j++){
+                this->_frequency[i][j] = orig._frequency[i][j];
+            }
+        }
+    }
+    /*
+    else{
+        throw std::invalid_argument(std::string("BigramCounter& BigramCounter::operator=(const BigramCounter &orig)"))
+         + "Cannot assign object to itself.");
+    }
+     */
+    return *this;
+}
+
+BigramCounter& BigramCounter::operator+=(const BigramCounter &rhs){
+    for (int i=0;i<getSize();i++){
+        for (int j=0;j<getSize();j++){
+            this->_frequency[i][j] += rhs._frequency[i][j];
+        }
+    }
+
+    return *this;
+}
+
 void BigramCounter::calculateFrequencies(const char *const fileName){}
 Language BigramCounter::toLanguage() const{}
 
@@ -120,4 +147,10 @@ int BigramCounter::findBigramPos(const Bigram &bigram) const{
         pos=-1;
     }
     return pos;
+}
+
+void BigramCounter::deallocate(){
+    delete [] _frequency[0];
+    delete [] _frequency;
+    _frequency=nullptr;
 }
