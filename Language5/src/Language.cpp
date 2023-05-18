@@ -37,7 +37,7 @@ Language::Language(int numberBigrams){
 Language::Language(const Language& orig){
     this->allocate(orig.getSize());
     this->_languageId=orig._languageId;
-    for (int i=0;i<_size;i++){
+    for (unsigned int i=0;i<_size;i++){
         _vectorBigramFreq[i] = orig._vectorBigramFreq[i];
     }
 }
@@ -117,7 +117,7 @@ double Language::getDistance(const Language& otherLanguage) const{
 int Language::findBigram(const Bigram& bigram) const{
     bool found=false;
     int pos=0;
-    for (int i=0;i<_size;i++){
+    for (unsigned int i=0;i<_size;i++){
         if (bigram.getText() == this->_vectorBigramFreq[i].getBigram().getText()){
             found=true;
             pos=i;
@@ -129,7 +129,7 @@ int Language::findBigram(const Bigram& bigram) const{
 
 std::string Language::toString() const{
     std::string cad = MAGIC_STRING_T + "\n" + _languageId + "\n" + std::to_string(_size);
-    for (int i=0;i<_size;i++){
+    for (unsigned int i=0;i<_size;i++){
         cad += "\n" + this->_vectorBigramFreq[i].toString();
     }
     return cad;
@@ -251,7 +251,7 @@ void Language::append(const BigramFreq& bigramFreq){
         
     }
     else{
-        int pos=findBigram(bigramFreq.getBigram());
+        unsigned int pos=findBigram(bigramFreq.getBigram());
         //We could have used an auxiliary method to increment the frequency, however, i find
         //this implementation better to avoid creating unnececesary methods
         this->_vectorBigramFreq[pos]
@@ -274,7 +274,7 @@ const BigramFreq& Language::operator[](int index) const{
 }
 
 Language& Language::operator+=(const Language &language){
-    for (int i=0;i<language.getSize();i++){
+    for (unsigned int i=0;i<language.getSize();i++){
         append(language.at(i));
     }
     return *this;

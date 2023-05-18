@@ -133,7 +133,7 @@ int BigramCounter::findBigramPos(const Bigram &bigram) const{
     int pos;
     bool found_x = false;
     bool found_y = false; 
-    for (int i=0;i<_validCharacters.length();i++){
+    for (unsigned int i=0;i<_validCharacters.length();i++){
         if (_validCharacters[i]==bigram.getText().at(0)){
             pos += i*10;
             found_x = true;
