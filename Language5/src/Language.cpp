@@ -247,7 +247,7 @@ void Language::load(const char fileName[]) {
 void Language::append(const BigramFreq& bigramFreq){
     if(findBigram(bigramFreq.getBigram())==-1){
         reallocate(_size+1);
-        this->_vectorBigramFreq[_size]=bigramFreq;
+        this->_vectorBigramFreq[_size-1]=bigramFreq;
         
     }
     else{
