@@ -48,8 +48,8 @@ std::string BigramFreq::toString() const{
 void BigramFreq::serialize(std::ostream& outputStream){}
 void BigramFreq::deserialize(std::istream& inputSstream){}
 
-std::ostream operator<<(std::ostream os,const BigramFreq& bigramFreq){}
-std::istream operator>>(std::istream is,const BigramFreq& bigramFreq){}
+std::ostream &operator<<(std::ostream os,const BigramFreq& bigramFreq){}
+std::istream &operator>>(std::istream is,const BigramFreq& bigramFreq){}
 
 bool operator>(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
     bool greater = false;

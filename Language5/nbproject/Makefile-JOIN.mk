@@ -46,8 +46,8 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-D JOIN
+CXXFLAGS=-D JOIN
 
 # Fortran Compiler Flags
 FFLAGS=
