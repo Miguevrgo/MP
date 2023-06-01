@@ -476,7 +476,7 @@ SECS_WAIT=15
 # Executes the script in interactive or batch mode
 DO_INTERACTIVE=YES
 # Forces the name of the ZIP. If left empty, the zip uses the name of the root foder
-ZIP_NAME=$PROJECT_NAME
+ZIP_NAME=PRACTICAMP
 if [ "$1" == "-help" ] || [ "$1" == "-h" ]
 then
 	viewHelp "$HELPTEXT"

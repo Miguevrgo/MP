@@ -18,11 +18,11 @@
  * @param outputStream The output stream where the help will be shown (for example,
  * cout, cerr, etc) 
  */
-void showEnglishHelp(std::ostream& outputStream) {
-    outputStream << "Error, run with the following parameters:" << std::endl;
-    outputStream << "CLASSIFY <text.txt> <lang1.bgr> [<lang2.bgr> <lang3.bgr> ....]" << std::endl;
-    outputStream << "          Obtains the identifier of the closest language to the input text file" << std::endl;
-    outputStream << std::endl;
+void showEnglishHelp(ostream& outputStream) {
+    outputStream << "Error, run with the following parameters:" << endl;
+    outputStream << "CLASSIFY <text.txt> <lang1.bgr> [<lang2.bgr> <lang3.bgr> ....]" << endl;
+    outputStream << "          Obtains the identifier of the closest language to the input text file" << endl;
+    outputStream << endl;
 }
 
 /**

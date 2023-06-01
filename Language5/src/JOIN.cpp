@@ -18,15 +18,15 @@
  * @param outputStream The output stream where the help will be shown (for example,
  * cout, cerr, etc) 
  */
-void showEnglishHelp(std::ostream& outputStream) {
-    outputStream << "Error, run with the following parameters:" << std::endl;
-    outputStream << "JOIN [-t|-b] [-o <outputFile.bgr>] <file1.bgr> [<file2.bgr> ... <filen.bgr>] " << std::endl;
-    outputStream << "       join the Language files <file1.bgr> <file2.bgr> ... into <outputFile.bgr>" << std::endl;
-    outputStream << std::endl;
-    outputStream << "Parameters:" << std::endl;
-    outputStream << "-t|-b: text mode or binary mode for the output file (-t by default)" << std::endl;
-    outputStream << "-o <outputFile.bgr>: name of the output file (output.bgr by default)" << std::endl;
-    outputStream << "<file*.bgr>: each one of the files to be joined" << std::endl;
+void showEnglishHelp(ostream& outputStream) {
+    outputStream << "Error, run with the following parameters:" << endl;
+    outputStream << "JOIN [-t|-b] [-o <outputFile.bgr>] <file1.bgr> [<file2.bgr> ... <filen.bgr>] " << endl;
+    outputStream << "       join the Language files <file1.bgr> <file2.bgr> ... into <outputFile.bgr>" << endl;
+    outputStream << endl;
+    outputStream << "Parameters:" << endl;
+    outputStream << "-t|-b: text mode or binary mode for the output file (-t by default)" << endl;
+    outputStream << "-o <outputFile.bgr>: name of the output file (output.bgr by default)" << endl;
+    outputStream << "<file*.bgr>: each one of the files to be joined" << endl;
 }
 
 /**
@@ -35,7 +35,7 @@ void showEnglishHelp(std::ostream& outputStream) {
  * input Language objects. The result is then sorted by decreasing order of 
  * frequency and alphabetical order of bigrams when there is any tie in 
  * frequencies. Finally, the resulting Language is saved in an output file. The 
- * program must have at least an output file. 
+ * program must have at least an input file. 
  * Running example:
  * >  JOIN [-t|-b] [-o <outputFile.bgr>] <file1.bgr> [<file2.bgr> ... <filen.bgr>]
  * @param argc The number of command line parameters

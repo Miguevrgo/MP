@@ -5,14 +5,13 @@
 
 /**
  * @file BigramFreq.cpp
- * @author Miguel Ángel De la Vega Rodríguez<miguevrod@correo.ugr.es>
+ * @author Miguel Ángel De la Vega Rodríguez <miguevrod@correo.ugr.es>
  * @version 0.1
  * @date 2023-13-5
  * 
  */
 
-
-#include "BigramFreq.h"
+#include <BigramFreq.h>
 
 
 BigramFreq::BigramFreq(Bigram bigram,int frequency){

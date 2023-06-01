@@ -16,7 +16,6 @@
 #define LANGUAGE_H
 
 
-#include <iostream>
 #include "BigramFreq.h"
 
 /**
@@ -153,7 +152,7 @@ public:
     std::string toString() const;
 
     /**
-     * @brief Sort the vector of BigramFreq in decreasing order of frequency.
+     * @brief Sorts the vector of BigramFreq in decreasing order of frequency.
      * If two BigramFreq objects have the same frequency, then the alphabetical 
      * order of the bigrams of those objects will be considered (the object 
      * with a bigram that comes first alphabetically will appear first)
@@ -165,11 +164,13 @@ public:
      * @brief Saves this Language object in the given file
      * @param fileName A c-string with the name of the file where this Language 
      * object will be saved
+     * @param mode The mode to use to save this Language object: 't' for text
+     * mode and 'b' for binary mode
      * @throw std::ios_base::failure Throws a std::ios_base::failure exception 
      * if the given file cannot be opened or if an error occurs while writing
      * to the file
      */
-    void save(const char fileName[]) const;
+    void save(const char fileName[], char mode = 't') const;
 
     /**
      * @brief Loads into this object the Language object stored in the given 
@@ -201,15 +202,15 @@ public:
      * @param index index of the element. Input parameter
      * @return A reference to the BigramFreq object at position @p index
      */
-    BigramFreq& operator[](int index);
+    BigramFreq &operator[](int index);
 
     /**
      * @brief Overloading of the [] operator for Language class
-     * @param index index of the element. Input parameter
-     * @return A const reference to the BigramFreq object at position @p index
+     * @param index index of the element. Input parameter 
+     * @return A reference to the BigramFreq object at position @p index
      */
-    const BigramFreq& operator[](int index) const;
-
+    const BigramFreq &operator[](int index) const;
+    
     /**
      * @brief Overloading of the += operator with a Language parameter. 
      * For each bigram in the given Language @p language, if that bigram is 
@@ -227,10 +228,6 @@ private:
     int _size; ///< Number of elements in _vectorBigramFreq
     static const std::string MAGIC_STRING_T; ///< A const string with the magic string for text files
     static const std::string MAGIC_STRING_B; ///< A const string with the magic string for binary files
-    /**
-     * @brief Auxiliar method used to resize Dynamic array of BigramFreq
-     * @param new_size New size for the dynamic array
-     */
     void allocate(int n_elements);
     void deallocate();
     void reallocate(int new_size);
@@ -242,7 +239,7 @@ private:
  * @param language the Language object. Input parameter
  * @return @p os A reference to the output stream
  */
-std::ostream& operator<<(std::ostream &os, const Language &language);
+std::ostream &operator<<(std::ostream &os, const Language &language);
 
 /**
  * @brief Overloading of the stream extraction operator for Language class
@@ -252,6 +249,6 @@ std::ostream& operator<<(std::ostream &os, const Language &language);
  * @param language the Language object. Output parameter
  * @return @p is A reference to the input stream
  */
-std::istream& operator>>(std::istream &is,const Language &language);
+std::istream &operator>>(std::istream &is, const Language &language);
 
 #endif /* LANGUAGE_H */

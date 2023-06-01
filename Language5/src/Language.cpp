@@ -14,9 +14,9 @@
 
 #include "Language.h"
 
-
 const std::string Language::MAGIC_STRING_T="MP-LANGUAGE-T-1.0";
 const std::string Language::MAGIC_STRING_B="MP-LANGUAGE-B-1.0";
+
 
 Language::Language(): _languageId("unknown"){
     allocate(0);
@@ -194,7 +194,7 @@ void Language::sort(){
     quickSort(this->_vectorBigramFreq,_size,0,_size-1);
 }
 
-void Language::save(const char fileName[]) const{
+void Language::save(const char fileName[],char mode) const{
     std::ofstream outputStream;
     outputStream.open(fileName);
     if (!outputStream){

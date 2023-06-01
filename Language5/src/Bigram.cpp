@@ -11,9 +11,7 @@
  * 
  */
 
-
-#include "Bigram.h"
-
+#include <Bigram.h>
 
 Bigram::Bigram(const std::string& text) {
     if (text.length() == 2){

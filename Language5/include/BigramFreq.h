@@ -156,4 +156,3 @@ bool operator<=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2);
 bool operator>=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2);
 
 #endif /* BIGRAM_FREQ_H */
-
