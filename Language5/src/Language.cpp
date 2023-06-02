@@ -117,11 +117,16 @@ double Language::getDistance(const Language& otherLanguage) const{
 int Language::findBigram(const Bigram& bigram) const{
     bool found=false;
     unsigned int pos=0;
-    for (unsigned int i=0;i<_size;i++){
+    unsigned int i=0;
+    while(!found && i<_size){
         if (bigram.getText() == this->_vectorBigramFreq[i].getBigram().getText()){
             found=true;
             pos=i;
         }
+        else{
+            i++;
+        }
+        
     }
     return (found) ? pos : -1; //If found return pos else return -1
 
