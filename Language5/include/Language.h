@@ -249,6 +249,6 @@ std::ostream &operator<<(std::ostream &os, const Language &language);
  * @param language the Language object. Output parameter
  * @return @p is A reference to the input stream
  */
-std::istream &operator>>(std::istream &is, const Language &language);
+std::istream &operator>>(std::istream &is,Language &language);
 
 #endif /* LANGUAGE_H */

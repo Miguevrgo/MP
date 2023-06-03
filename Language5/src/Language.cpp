@@ -330,5 +330,11 @@ void Language::reallocate(int new_size){
 }
 
 
-std::ostream& operator<<(std::ostream &os,const Language &language){}
-std::istream& operator>>(std::istream &is,const Language &language){}
+std::ostream &operator<<(std::ostream &os, const Language &language){
+    os << language.toString();
+    return os;
+}
+
+std::istream &operator>>(std::istream &is, Language &language){
+    // Preguntar en clase si hay que incluir todo (LOAD)
+}

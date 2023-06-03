@@ -12,17 +12,17 @@
  * Created on 29 January 2023, 11:00
  */
 
-
+#include "BigramCounter.h"
 /**
  * Shows help about the use of this program in the given output stream
  * @param outputStream The output stream where the help will be shown (for example,
  * cout, cerr, etc) 
  */
-void showEnglishHelp(ostream& outputStream) {
-    outputStream << "Error, run with the following parameters:" << endl;
-    outputStream << "CLASSIFY <text.txt> <lang1.bgr> [<lang2.bgr> <lang3.bgr> ....]" << endl;
-    outputStream << "          Obtains the identifier of the closest language to the input text file" << endl;
-    outputStream << endl;
+void showEnglishHelp(std::ostream& outputStream){
+    outputStream << "Error, run with the following parameters:" << std::endl;
+    outputStream << "CLASSIFY <text.txt> <lang1.bgr> [<lang2.bgr> <lang3.bgr> ....]" << std::endl;
+    outputStream << "          Obtains the identifier of the closest language to the input text file" << std::endl;
+    outputStream << std::endl;
 }
 
 /**
@@ -36,7 +36,7 @@ void showEnglishHelp(ostream& outputStream) {
  * @param argv The vector of command line parameters (cstrings)
  * @return 0 If there is no error; a value > 0 if error
  */
-int main(int argc, char *argv[]) {
- 
+int main(int argc, char *argv[]) { 
+   
 }
 

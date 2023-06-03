@@ -50,7 +50,7 @@ public:
      * @param orig the BigramCounter object used as source for the copy. Input
      * parameter
      */
-    BigramCounter(BigramCounter orig);
+    BigramCounter(const BigramCounter &orig);
 
     /**
      * @brief Destructor
@@ -63,14 +63,14 @@ public:
      * @return the number (size) of valid characters that are considered as part 
      * of a word in this BigramCounter object 
      */
-    int getSize();
+    int getSize() const;
 
     /**
      * @brief Gets the number of bigrams with a frequency greater than 0.
      * Query method
      * @return the number of bigrams with a frequency greater than 0
      */
-    int getNumberActiveBigrams();
+    int getNumberActiveBigrams() const;
 
     /**
      * @brief Sets the frequency of the given bigram using the value 
@@ -80,7 +80,7 @@ public:
      * @param frequency The new frequency. Input parameter
      * @return true if the bigram was found in this object. false otherwise
      */
-    bool setFrequency(Bigram bigram, int frequency);
+    bool setFrequency(const Bigram &bigram, int frequency);
 
     /**
      * @brief Increases the current frequency of the given bigram using the value 
@@ -94,7 +94,7 @@ public:
      * @param frequency The quantity that will be added to the current frequency.
      * Input parameter
      */
-    void increaseFrequency(Bigram bigram, int frequency = 0);
+    void increaseFrequency(const Bigram &bigram, int frequency = 0);
 
     /**
      * @brief Overloading of the assignment operator
@@ -102,7 +102,7 @@ public:
      * Input parameter
      * @return A reference to this object
      */
-    BigramCounter operator=(BigramCounter orig);
+    BigramCounter &operator=(const BigramCounter &orig);
 
 
     /**
@@ -113,7 +113,7 @@ public:
      * @param rhs a BigramCounter object 
      * @return A reference to this object
      */
-    BigramCounter operator+=(BigramCounter rhs);
+    BigramCounter &operator+=(const BigramCounter &rhs);
 
     /**
      * @brief Reads the given text file and calculates the frequencies of each 
@@ -123,7 +123,7 @@ public:
      * if the given file cannot be opened
      * @param fileName The name of the file to process. Input parameter
      */
-    void calculateFrequencies(char* fileName);
+    void calculateFrequencies(const char* fileName);
 
     /**
      * @brief Builds a Language object from this BigramCounter object. The 
@@ -132,7 +132,7 @@ public:
      * Query method
      * @return A Language object from this BigramCounter object
      */
-    Language toLanguage();
+    Language toLanguage() const;
 
 private:
     int** _frequency; ///< 2D matrix with the frequency of each bigram
@@ -152,7 +152,7 @@ private:
      * @param column Column of the element. Input parameter
      * @return A const reference to the element at the given position
      */
-    int operator()(int row, int column);
+    const int &operator()(int row, int column) const;
 
     /**
      * @brief Overloading of the () operator to access to the element at a 
@@ -162,7 +162,17 @@ private:
      * @param column Column of the element. Input parameter
      * @return A reference to the element at the given position
      */
-    int operator()(int row, int column);
+    int &operator()(int row, int column);
+    void allocate(int n_elements);
+    void deallocate();
+      /**
+     * @brief Provides location of a certain bigram in the matrix
+     * Query method
+     * @param bigram Bigram to be found. Input parameter
+     * @return Position of the bigram in the matrix
+     * PRE-CONDITION Number of valid characters < 99 
+     */
+    int findBigramPos(const Bigram &bigram) const;
 };
 
 #endif /* BIGRAM_COUNTER_H */

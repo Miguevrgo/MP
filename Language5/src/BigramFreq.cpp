@@ -44,11 +44,30 @@ std::string BigramFreq::toString() const{
     return(_bigram.toString() + " " + std::to_string(_frequency));
 }
 
-void BigramFreq::serialize(std::ostream& outputStream){}
-void BigramFreq::deserialize(std::istream& inputSstream){}
+void BigramFreq::serialize(std::ostream &outputStream){
+    _bigram.serialize(outputStream);
+    outputStream.write(reinterpret_cast<const char*>(&_frequency), sizeof(_frequency));
+}
 
-std::ostream &operator<<(std::ostream os,const BigramFreq& bigramFreq){}
-std::istream &operator>>(std::istream is,const BigramFreq& bigramFreq){}
+void BigramFreq::deserialize(std::istream& inputStream){
+    _bigram.deserialize(inputStream);
+    inputStream.read(reinterpret_cast<char*>(&_frequency), sizeof(_frequency));
+}
+
+std::ostream &operator<<(std::ostream &os,const BigramFreq& bigramFreq){
+    os << bigramFreq.toString();
+    return os;
+}
+
+std::istream &operator>>(std::istream &is, BigramFreq& bigramFreq){
+    std::string text;
+    unsigned int frequency;
+
+    is >> text >> frequency;
+    bigramFreq = BigramFreq(Bigram(text),frequency);
+
+    return is;
+}
 
 bool operator>(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
     bool greater = false;
@@ -64,20 +83,11 @@ bool operator>(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
 
     return greater;
 }
+
 bool operator<(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
-    bool smaller = false;
-
-    if (bigramFreq1.getFrequency() < bigramFreq2.getFrequency()){
-        smaller = true;
-    }
-    else if (bigramFreq1.getFrequency() == bigramFreq2.getFrequency()){
-        if (bigramFreq1.getBigram().getText().compare(bigramFreq2.getBigram().getText()) < 0){
-            smaller = true;
-        }
-    }
-
-    return smaller;
+    return !(operator>(bigramFreq1, bigramFreq2) || operator==(bigramFreq1, bigramFreq2));
 }
+
 bool operator==(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
     bool equal = false;
 
@@ -91,33 +101,13 @@ bool operator==(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
 }
 
 bool operator!=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
-    bool nequal = true;
-
-    if (bigramFreq1.getFrequency() == bigramFreq2.getFrequency()){
-        if (bigramFreq1.getBigram().getText().compare(bigramFreq2.getBigram().getText()) == 0){
-            nequal = false;
-        }
-    }
-
-    return nequal;
+    return(!operator==(bigramFreq1, bigramFreq2));
 }
 
 bool operator<=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
-    bool smaller_eq = false;
-
-    if (bigramFreq1.getFrequency() <= bigramFreq2.getFrequency()){
-        smaller_eq = true;
-    }
-
-    return smaller_eq;
+    return(!operator>(bigramFreq1, bigramFreq2));
 }
 
 bool operator>=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
-    bool greater_eq = false;
-
-    if (bigramFreq1.getFrequency() >= bigramFreq2.getFrequency()){
-        greater_eq = true;
-    }
-
-    return greater_eq;
+    return(!operator<(bigramFreq1, bigramFreq2));
 }

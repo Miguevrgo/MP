@@ -66,12 +66,27 @@ void Bigram::toUpper(){
     
 }
 
-void Bigram::serialize(std::ostream& outputStream){}
-void Bigram::deserialize(std::istream& inputStream){}
+void Bigram::serialize(std::ostream& outputStream){
+    outputStream.write(_text,2);
+}
+
+void Bigram::deserialize(std::istream& inputStream){
+    inputStream.read(_text,2);
+    _text[2] = '\0';
+}
 
 bool isValidCharacter(char character, const std::string& validCharacters){
     return(validCharacters.find(character) != std::string::npos); //If we were using C++23 we could have used the string function contains()
 }
 
-std::ostream operator<<(std::ostream os, Bigram bigram){}
-std::istream operator>>(std::istream is, Bigram bigram){}
+std::ostream &operator<<(std::ostream &os, const Bigram &bigram){
+    os << bigram.getText();
+    return os;
+}
+
+std::istream &operator>>(std::istream &is, Bigram &bigram){
+    std::string text;
+    is >> text;
+    bigram = Bigram(text);
+    return is;
+}

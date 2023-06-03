@@ -11,7 +11,7 @@
  * 
  * Created on 29 January 2023, 11:00
  */
-
+#include "BigramCounter.h"
 /**
  * Shows help about the use of this program in the given output stream
  * @param outputStream The output stream where the help will be shown (for example,
@@ -39,7 +39,7 @@ void showEnglishHelp(std::ostream& outputStream) {
  * @return 0 If there is no error; a value > 0 if error
  */
 
-int main(int argc, char *argv[]) {   
-
+int main(int argc, char *argv[]) { 
+    
 }
 
