@@ -40,6 +40,85 @@ void showEnglishHelp(std::ostream& outputStream) {
  */
 
 int main(int argc, char *argv[]) { 
-    
+
+    // Default values
+    char mode = 't';    // Binary mode.
+    std::string language = "unknown";
+    std::string output = "output.bgr";
+
+    bool valid_param = true;
+    bool reused_option = false; // If an option has been already used
+
+
+    bool tb_option = false; // Binary or text mode
+    bool id_option = false; // Language ID
+    bool out_option = false; // Output file name
+
+    unsigned int num_param(1); // Number of parametre to be cheked
+
+    while(!reused_option && valid_param && argv[num_param][0] == '-'){
+
+        // Once there is an optional option we need at least a file (+1)
+        valid_param = argc >= num_param+1;
+
+        /*_______________________Check tb_option___________________________*/
+        if (strcmp(argv[num_param], "-t") == 0 || strcmp(argv[num_param], "-b") == 0){
+            if (!tb_option){
+                tb_option = true; // Used
+                mode = argv[num_param][1];
+                num_param++;
+            }
+            else{
+                reused_option = true;
+            }
+        }
+        /*_______________________Check id_option___________________________*/
+        else if(strcmp(argv[num_param], "-l") == 0){
+            if(!id_option){
+                id_option = true; // Used
+                valid_param = argc >= ++num_param;
+                language = argv[num_param];
+                num_param++;
+            }
+            else{
+                reused_option = true;
+            }
+        }
+        /*_______________________Check out_option___________________________*/
+        else if(strcmp(argv[num_param], "-o") == 0){
+            if(!out_option){
+                out_option = true; // Used
+                valid_param = argc >= ++num_param;
+                output = argv[num_param];
+                num_param++;
+            }
+            else{
+                reused_option = true;
+            }
+        }
+        else{
+            valid_param = false; // No valid option after -
+        }
+
+    } // End While
+
+    if (!valid_param || reused_option){
+        showEnglishHelp(std::cerr);
+        return 1;
+    }
+
+    BigramCounter builder;
+
+    Language lang;
+    lang.setLanguageId(language);
+
+    for(unsigned int i=num_param;i<argc;i++){
+        builder.calculateFrequencies(argv[i]);
+        lang += builder.toLanguage();
+    }
+
+    lang.save(output.c_str(),mode);
+
+    return 0;
 }
 

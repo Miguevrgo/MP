@@ -37,6 +37,12 @@ void showEnglishHelp(std::ostream& outputStream){
  * @return 0 If there is no error; a value > 0 if error
  */
 int main(int argc, char *argv[]) { 
-   
+    //Invalid number of arguments provided
+    if (argc < 3){
+        showEnglishHelp(std::cerr);
+        return 1;
+    }
+
+
 }
 

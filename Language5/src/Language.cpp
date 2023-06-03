@@ -133,7 +133,7 @@ int Language::findBigram(const Bigram& bigram) const{
 }
 
 std::string Language::toString() const{
-    std::string cad = MAGIC_STRING_T + "\n" + _languageId + "\n" + std::to_string(_size);
+    std::string cad = _languageId + "\n" + std::to_string(_size);
     for (unsigned int i=0;i<_size;i++){
         cad += "\n" + this->_vectorBigramFreq[i].toString();
     }
@@ -199,12 +199,19 @@ void Language::sort(){
     quickSort(this->_vectorBigramFreq,_size,0,_size-1);
 }
 
-void Language::save(const char fileName[],char mode) const{
+void Language::save(const char fileName[], char mode) const{
     std::ofstream outputStream;
     outputStream.open(fileName);
     if (!outputStream){
         throw std::ios_base::failure(std::string("void Language::save(const char fileName[]) const") 
         + "failed opening the file");
+    }
+    
+    if (mode == 't'){
+        outputStream << MAGIC_STRING_T + "\n";
+    }
+    else{
+        outputStream << MAGIC_STRING_B + "\n";
     }
     
     outputStream << toString() << "\n";
