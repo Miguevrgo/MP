@@ -1,0 +1,26 @@
+==18917== Memcheck, a memory error detector
+==18917== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18917== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==18917== Command: /home/miguevr/GitHub/MP/Language5/./dist/LEARN/GNU-Linux/LEARN -l english -o tests/output/aliceWonder.bgr ../Books/aliceWonder.txt
+==18917== 
+==18917== 
+==18917== Process terminating with default action of signal 15 (SIGTERM)
+==18917==    at 0x10D65B: BigramCounter::resetMatrix() (BigramCounter.cpp:214)
+==18917==    by 0x10CEF0: BigramCounter::calculateFrequencies(char const*) (BigramCounter.cpp:136)
+==18917==    by 0x1116DC: main (LEARN.cpp:121)
+==18917== 
+==18917== HEAP SUMMARY:
+==18917==     in use at exit: 94,945 bytes in 9 blocks
+==18917==   total heap usage: 10 allocs, 1 frees, 95,003 bytes allocated
+==18917== 
+==18917== LEAK SUMMARY:
+==18917==    definitely lost: 0 bytes in 0 blocks
+==18917==    indirectly lost: 0 bytes in 0 blocks
+==18917==      possibly lost: 0 bytes in 0 blocks
+==18917==    still reachable: 94,945 bytes in 9 blocks
+==18917==         suppressed: 0 bytes in 0 blocks
+==18917== Reachable blocks (those to which a pointer was found) are not shown.
+==18917== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==18917== 
+==18917== For lists of detected and suppressed errors, rerun with: -s
+==18917== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,0 +1,1 @@
+Test #2 [tests//classify_Die.test] valgrind --leak-check=full  ./dist/CLASSIFY/GNU-Linux/CLASSIFY  ../Books/Die_Verwandlung.Franz_Kafka.German.txt ../Books/changedMan.bgr ../Books/lesMiserables.bgr ../Books/fortunata.bgr ../Books/aliceWonder.bgr

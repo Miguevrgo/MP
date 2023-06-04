@@ -1,0 +1,1 @@
+Test #6 [tests//join_10bigrams_10bigrams.test] valgrind --leak-check=full  ./dist/JOIN/GNU-Linux/JOIN  -o tests/output/10bigrams_10bigrams.bgr ../Books/10bigrams.bgr ../Books/10bigrams.bgr

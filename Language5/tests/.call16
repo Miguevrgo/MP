@@ -1,0 +1,1 @@
+Test #16 [tests//learn_changedMan.test] valgrind --leak-check=full  ./dist/LEARN/GNU-Linux/LEARN  ../Books/changedMan.txt

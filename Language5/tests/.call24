@@ -1,0 +1,1 @@
+Test #24 [tests//learn_spanish.test] valgrind --leak-check=full  ./dist/LEARN/GNU-Linux/LEARN  -l spanish -o tests/output/spanish_quijote+fortunata.bgr ../Books/quijote.txt ../Books/fortunata.txt

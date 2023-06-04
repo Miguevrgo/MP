@@ -1,0 +1,1 @@
+Test #9 [tests//join_english.test] valgrind --leak-check=full  ./dist/JOIN/GNU-Linux/JOIN  -o tests/output/english.bgr ../Books/aliceWonder.bgr ../Books/changedMan.bgr

@@ -26,7 +26,7 @@ const char* const BigramCounter::DEFAULT_VALID_CHARACTERS="abcdefghijklmnopqrstu
 
 BigramCounter::BigramCounter(std::string validChars){
     unsigned int length = validChars.length(); // Length of the string validChars 
-    
+    this->_validCharacters = validChars;
     this->allocate(length);
 
     //Initialize the array to 0
@@ -126,57 +126,36 @@ BigramCounter& BigramCounter::operator+=(const BigramCounter &rhs){
 }
 
 void BigramCounter::calculateFrequencies(const char *const fileName){
-    // std::ifstream inputStream;
-    // inputStream.open(fileName);
-    // if(!inputStream){
-    //     throw std::ios_base::failure(std::string("void BigramCounter::calculateFrequencies(const char *const fileName)") 
-    //     + " file " + fileName + " could not be oppened");
-    // }
-
-    // this->resetMatrix();
-
-    // std::string text, line;
-    // while(getline(inputStream, line)){
-    //     text += line;
-    // }
+    std::ifstream inputStream;
+    inputStream.open(fileName);
+    if(!inputStream){
+        throw std::ios_base::failure(std::string("void BigramCounter::calculateFrequencies(const char *const fileName)") 
+        + " file " + fileName + " could not be oppened");
+    }
     
-    // int text_size = text.length();
+    this->resetMatrix();
 
-    // for (int i=0,j=1;j<text_size;i++,j++){
-    //     if(isValidCharacter(text.at(i),_validCharacters) && isValidCharacter(text.at(j),_validCharacters)){
-    //         this->increaseFrequency(Bigram(text[i],text[j]),1);
-
-    //     }
-    //     // If the second character is not valid we should skip two positions
-    //     // to avoid unnecessary checks
-    //     else if(!isValidCharacter(text.at(j),_validCharacters)){
-    //         i++;
-    //         j++;
-    //     }
-    // }
-
-    // inputStream.close();
-    void BigramCounter::calculateFrequencies(const char* filename) {
-    std::ifstream file(filename, std::ios::binary);
-
-    if (!file) {
-        std::cerr << "Error al abrir el archivo: " << filename << std::endl;
-        return;
+    std::string text, line;
+    while(getline(inputStream, line)){
+        text += line;
     }
+    
+    int text_size = text.length();
+    int text_size = 50;
+    for (int i=0,j=1;j<text_size;i++,j++){
+        if(isValidCharacter(text.at(i),_validCharacters) && isValidCharacter(text.at(j),_validCharacters)){
+            this->increaseFrequency(Bigram(text[i],text[j]),1);
 
-    char prev = '\0';
-    char current;
-
-    while (file.read(reinterpret_cast<char*>(&current), sizeof(char))) {
-        if (prev != '\0') {
-            std::pair<char, char> bigram(prev, current);
-            frequencies[bigram]++;
         }
-        prev = current;
+        // If the second character is not valid we should skip two positions
+        // to avoid unnecessary checks
+        else if(!isValidCharacter(text.at(j),_validCharacters)){
+            i++;
+            j++;
+        }
     }
-
-    file.close();
-}
+    
+    inputStream.close();
 }
 
 Language BigramCounter::toLanguage() const{

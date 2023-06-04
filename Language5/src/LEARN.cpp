@@ -40,7 +40,12 @@ void showEnglishHelp(std::ostream& outputStream) {
  */
 
 int main(int argc, char *argv[]) { 
-
+    
+    if (argc < 2){
+        showEnglishHelp(std::cerr);
+        return 1;
+    }
+    
     // Default values
     char mode = 't';    // Binary mode.
     std::string language = "unknown";
@@ -111,12 +116,12 @@ int main(int argc, char *argv[]) {
 
     Language lang;
     lang.setLanguageId(language);
-
+    
     for(unsigned int i=num_param;i<argc;i++){
         builder.calculateFrequencies(argv[i]);
         lang += builder.toLanguage();
     }
-
+    
     lang.save(output.c_str(),mode);
 
     return 0;
