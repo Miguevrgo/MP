@@ -78,9 +78,9 @@ public:
      * the Bigram of this object and them then the bytes of the
      * frequency (an int value) in binary format (using 
      * method istream::read(char* s, streamsize n))
-     * @param inputSstream A input stream from which this object will be deserialized
+     * @param inputStream A input stream from which this object will be deserialized
      */
-    void deserialize(std::istream& inputSstream);
+    void deserialize(std::istream& inputStream);
 
 private:
     Bigram _bigram; ///< the Bigram object

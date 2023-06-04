@@ -67,11 +67,11 @@ void Bigram::toUpper(){
 }
 
 void Bigram::serialize(std::ostream& outputStream){
-    outputStream.write(_text,2);
+    outputStream.write(_text, sizeof(char)*2);
 }
 
 void Bigram::deserialize(std::istream& inputStream){
-    inputStream.read(_text,2);
+    inputStream.read(_text, sizeof(char)*2);
     _text[2] = '\0';
 }
 

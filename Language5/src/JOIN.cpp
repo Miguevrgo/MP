@@ -43,7 +43,12 @@ void showEnglishHelp(std::ostream& outputStream) {
  * @return 0 If there is no error; a value > 0 if error
  */
 int main(int argc, char* argv[]) { 
-
+    
+    if (argc < 2){
+        showEnglishHelp(std::cerr);
+        return 1;
+    }
+    
     // Default values
     char mode = 't';    // Binary mode.
     std::string output = "output.bgr";
@@ -103,7 +108,8 @@ int main(int argc, char* argv[]) {
         aux.load(argv[i]);
         lang += aux;
     }
-
+    
+    lang.sort();
     lang.save(output.c_str(),mode);
 
 }

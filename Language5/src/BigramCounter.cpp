@@ -50,6 +50,10 @@ BigramCounter::~BigramCounter(){
     deallocate();
 }
 
+int BigramCounter::getSize() const{
+    return _validCharacters.length();
+}
+
 int BigramCounter::getNumberActiveBigrams() const{
     unsigned int length = _validCharacters.length();
     unsigned int counter = 0;
@@ -122,36 +126,57 @@ BigramCounter& BigramCounter::operator+=(const BigramCounter &rhs){
 }
 
 void BigramCounter::calculateFrequencies(const char *const fileName){
-    std::ifstream inputStream;
-    inputStream.open(fileName);
-    if(!inputStream){
-        throw std::ios_base::failure(std::string("void BigramCounter::calculateFrequencies(const char *const fileName)") 
-        + " file " + fileName + " could not be oppened");
-    }
+    // std::ifstream inputStream;
+    // inputStream.open(fileName);
+    // if(!inputStream){
+    //     throw std::ios_base::failure(std::string("void BigramCounter::calculateFrequencies(const char *const fileName)") 
+    //     + " file " + fileName + " could not be oppened");
+    // }
 
-    this->resetMatrix();
+    // this->resetMatrix();
 
-    std::string text, line;
-    while(getline(inputStream, line)){
-        text += line;
-    }
+    // std::string text, line;
+    // while(getline(inputStream, line)){
+    //     text += line;
+    // }
     
-    int text_size = text.length();
+    // int text_size = text.length();
 
-    for (int i=0,j=1;j<text_size;i++,j++){
-        if(isValidCharacter(text.at(i),_validCharacters) && isValidCharacter(text.at(j),_validCharacters)){
-            this->increaseFrequency(Bigram(text[i],text[j]),1);
+    // for (int i=0,j=1;j<text_size;i++,j++){
+    //     if(isValidCharacter(text.at(i),_validCharacters) && isValidCharacter(text.at(j),_validCharacters)){
+    //         this->increaseFrequency(Bigram(text[i],text[j]),1);
 
-        }
-        // If the second character is not valid we should skip two positions
-        // to avoid unnecessary checks
-        else if(!isValidCharacter(text.at(j),_validCharacters)){
-            i++;
-            j++;
-        }
+    //     }
+    //     // If the second character is not valid we should skip two positions
+    //     // to avoid unnecessary checks
+    //     else if(!isValidCharacter(text.at(j),_validCharacters)){
+    //         i++;
+    //         j++;
+    //     }
+    // }
+
+    // inputStream.close();
+    void BigramCounter::calculateFrequencies(const char* filename) {
+    std::ifstream file(filename, std::ios::binary);
+
+    if (!file) {
+        std::cerr << "Error al abrir el archivo: " << filename << std::endl;
+        return;
     }
 
-    inputStream.close();
+    char prev = '\0';
+    char current;
+
+    while (file.read(reinterpret_cast<char*>(&current), sizeof(char))) {
+        if (prev != '\0') {
+            std::pair<char, char> bigram(prev, current);
+            frequencies[bigram]++;
+        }
+        prev = current;
+    }
+
+    file.close();
+}
 }
 
 Language BigramCounter::toLanguage() const{

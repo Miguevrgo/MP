@@ -201,20 +201,32 @@ void Language::sort(){
 
 void Language::save(const char fileName[], char mode) const{
     std::ofstream outputStream;
-    outputStream.open(fileName);
-    if (!outputStream){
-        throw std::ios_base::failure(std::string("void Language::save(const char fileName[]) const") 
-        + "failed opening the file");
-    }
     
-    if (mode == 't'){
+    if (mode == 't'){ // Text 
+        
+        outputStream.open(fileName, std::ios::out);
+        if (!outputStream){
+            throw std::ios_base::failure(std::string("void Language::save(const char fileName[]) const") 
+            + "failed opening the file");
+        }
         outputStream << MAGIC_STRING_T + "\n";
+        outputStream << *this << "\n";
+        
     }
-    else{
+    else{ // Binary
+        
+        outputStream.open(fileName, std::ios::out | std::ios::binary);
+        if (!outputStream){
+            throw std::ios_base::failure(std::string("void Language::save(const char fileName[]) const") 
+            + "failed opening the file");
+        }
         outputStream << MAGIC_STRING_B + "\n";
+        outputStream << _languageId + "\n";
+        for(unsigned int i=0; i<_size;i++){
+            _vectorBigramFreq[i].serialize(outputStream);
+        }
     }
     
-    outputStream << toString() << "\n";
 
     if(!outputStream){
         throw std::ios_base::failure(std::string("void Language::save(const char fileName[]) const") 
@@ -227,31 +239,53 @@ void Language::save(const char fileName[], char mode) const{
 void Language::load(const char fileName[]) {
     std::ifstream inputStream;
     std::string cadena_magica;
-    inputStream.open(fileName);
+    
+    inputStream.open(fileName, std::ios::in | std::ios::binary);
     if (!inputStream){
         throw std::ios_base::failure(std::string("void Language::load(const char fileName[])") 
         + "failed opening the file");
     }
-
+    
     inputStream >> cadena_magica;
-    if (cadena_magica != MAGIC_STRING_T){
+    
+    if(cadena_magica == MAGIC_STRING_T){
+        inputStream >> this->_languageId;
+        inputStream >> this->_size;
+        
+        if(_size < 0){
+            throw std::out_of_range(std::string("void Language::load(const char fileName[])")
+                    + "invalid negative size " + std::to_string(_size));
+        }
+        
+        allocate(_size);
+        
+        for(unsigned int i=0;i<_size;i++){
+            inputStream >> this->_vectorBigramFreq[i];
+        }
+    }
+    else if(cadena_magica == MAGIC_STRING_B){
+        inputStream >> this->_languageId;
+        inputStream >> this->_size;
+        
+        if(_size < 0){
+            throw std::out_of_range(std::string("void Language::load(const char fileName[])")
+                    + "invalid negative size " + std::to_string(_size));
+        }
+        
+        allocate(_size);
+        
+        for(unsigned int i=0; i<_size;i++){
+            _vectorBigramFreq[i].deserialize(inputStream);
+        }
+    }
+    else{
         throw std::invalid_argument(std::string("void Language::load(const char fileName[])") 
-        + "MAGIC_STRING_T invalid name " + cadena_magica);
+        + "MAGIC_STRING invalid name " + cadena_magica);
     }
     
-    inputStream >> this->_languageId;
-    inputStream >> this->_size;
     
-    allocate(_size);
     
-    unsigned int frequency;
-    char first,second;
-    for(unsigned int i=0;i<_size;i++){
-        inputStream >> first;
-        inputStream >> second;
-        inputStream >> frequency;
-        this->_vectorBigramFreq[i] = BigramFreq(Bigram(first,second),frequency);
-    }
+    
     
     inputStream.close(); 
 }
@@ -342,6 +376,14 @@ std::ostream &operator<<(std::ostream &os, const Language &language){
     return os;
 }
 
-std::istream &operator>>(std::istream &is, Language &language){
-    // Preguntar en clase si hay que incluir todo (LOAD)
+std::istream& operator>>(std::istream& is, Language& language) {
+  
+    // Leer cada par bigrama-frecuencia
+    for (int i = 0; i < language.getSize(); i++) {
+        BigramFreq bigramFreq;
+        is >> bigramFreq;
+        language.at(i) = bigramFreq;
+    }
+
+    return is;
 }
