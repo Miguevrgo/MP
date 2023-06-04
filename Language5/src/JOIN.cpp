@@ -96,5 +96,15 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    Language lang, aux;
+    lang.load(argv[num_param++]);
+
+    for(unsigned int i=num_param;i<argc;i++){
+        aux.load(argv[i]);
+        lang += aux;
+    }
+
+    lang.save(output.c_str(),mode);
+
 }
 

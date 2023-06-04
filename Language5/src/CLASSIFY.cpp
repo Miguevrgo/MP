@@ -43,6 +43,30 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    unsigned int pos_param(1);
 
+    BigramCounter builder;
+    builder.calculateFrequencies(argv[pos_param++]);
+
+    Language classify(builder.toLanguage());
+    Language aux;
+
+    double min_distance = 50; //Impossible distance value
+    std::string decision = "unknown"; // Final language decision
+
+    for(int i=pos_param;i<argc;i++){
+        aux.load(argv[i]);
+        decltype(classify.getDistance(aux)) distance = classify.getDistance(aux);
+
+        if (distance < min_distance){
+            min_distance = distance;
+            decision = aux.getLanguageId();
+        }
+    }
+
+    std::cout << "Final decision: language " << decision 
+              << " with a distance of " << min_distance << std::endl;
+
+    return 0;
 }
 

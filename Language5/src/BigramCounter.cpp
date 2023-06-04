@@ -63,21 +63,32 @@ int BigramCounter::getNumberActiveBigrams() const{
     return counter;
 }
 
-bool BigramCounter::setFrequency(const Bigram &bigram, int frequency){
-    int pos = findBigramPos(bigram);
-    bool found = false;
-    if (pos!=-1){
-        this->_frequency[pos/10][pos%10]=frequency;
-        found = true;
+bool BigramCounter::setFrequency(const Bigram& bigram, int frequency){
+
+    int fil = _validCharacters.find(bigram.at(0));
+    int col = _validCharacters.find(bigram.at(1));
+    
+    bool found = (fil != std::string::npos) && (col != std::string::npos);
+    
+    if (found){
+        (fil, col) = frequency;
     }
-    return (found);
+
+    return found;
 }
 
 void BigramCounter::increaseFrequency(const Bigram &bigram, int frequency){
-    int pos = findBigramPos(bigram);
-    if (pos!=-1){
-        this->_frequency[pos/10][pos%10] += frequency;
+    int fil = _validCharacters.find(bigram.at(0));
+    int col = _validCharacters.find(bigram.at(1));
+    
+    bool found = (fil != std::string::npos) && (col != std::string::npos);
+    
+    if (!found){
+        throw std::invalid_argument(std::string("void BigramCounter::increaseFrequency(const Bigram &bigram, int frequency)")
+        + " invalid bigram provided ");
     }
+
+    (fil, col) += frequency;
 }
 
 BigramCounter& BigramCounter::operator=(const BigramCounter &orig){
@@ -110,9 +121,57 @@ BigramCounter& BigramCounter::operator+=(const BigramCounter &rhs){
     return *this;
 }
 
-void BigramCounter::calculateFrequencies(const char *const fileName){}
+void BigramCounter::calculateFrequencies(const char *const fileName){
+    std::ifstream inputStream;
+    inputStream.open(fileName);
+    if(!inputStream){
+        throw std::ios_base::failure(std::string("void BigramCounter::calculateFrequencies(const char *const fileName)") 
+        + " file " + fileName + " could not be oppened");
+    }
 
-Language BigramCounter::toLanguage() const{}
+    this->resetMatrix();
+
+    std::string text, line;
+    while(getline(inputStream, line)){
+        text += line;
+    }
+    
+    int text_size = text.length();
+
+    for (int i=0,j=1;j<text_size;i++,j++){
+        if(isValidCharacter(text.at(i),_validCharacters) && isValidCharacter(text.at(j),_validCharacters)){
+            this->increaseFrequency(Bigram(text[i],text[j]),1);
+
+        }
+    }
+
+    inputStream.close();
+}
+
+Language BigramCounter::toLanguage() const{
+    Language lang;
+
+    int num_chars = this->getSize();
+    
+    BigramFreq bigramfreq;
+    Bigram bigram;
+
+    for (unsigned int i=0;i<num_chars;i++){
+        bigram.at(0) = this->_validCharacters[i];
+        for (unsigned int j=0;j<num_chars;j++){
+            bigram.at(1) = this->_validCharacters[j];
+
+            bigramfreq.setBigram(bigram);
+            bigramfreq.setFrequency((i,j));
+
+            lang.append(bigramfreq);
+        }
+    }
+
+    lang.sort();
+
+    return lang;
+}
 
 const int& BigramCounter::operator()(int row, int column) const{
     return _frequency[row][column];
@@ -130,25 +189,6 @@ void BigramCounter::allocate(int n_elements){
     }
 }
 
-int BigramCounter::findBigramPos(const Bigram &bigram) const{
-    int pos;
-    bool found_x = false;
-    bool found_y = false; 
-    for (unsigned int i=0;i<_validCharacters.length();i++){
-        if (_validCharacters[i]==bigram.getText().at(0)){
-            pos += i*10;
-            found_x = true;
-        }
-        if (_validCharacters[i]==bigram.getText().at(1)){
-            pos += i;
-            found_y = true;
-        }
-    }
-    if (!(found_x && found_y)){
-        pos=-1;
-    }
-    return pos;
-}
 
 void BigramCounter::deallocate(){
     delete [] _frequency[0];
@@ -156,22 +196,12 @@ void BigramCounter::deallocate(){
     _frequency=nullptr;
 }
 
-int BigramCounter::findBigramPos(const Bigram &bigram) const{
-    int pos;
-    bool found_x = false;
-    bool found_y = false; 
-    for (int i=0;i<_validCharacters.length();i++){
-        if (_validCharacters[i]==bigram.getText().at(0)){
-            pos += i*10;
-            found_x = true;
-        }
-        if (_validCharacters[i]==bigram.getText().at(1)){
-            pos += i;
-            found_y = true;
+void BigramCounter::resetMatrix(){
+    int length = this->getSize();
+
+    for (unsigned int i=0;i<length;i++){
+        for (unsigned int j=0;j<length;j++){
+            (i,j)=0;
         }
     }
-    if (!(found_x && found_y)){
-        pos=-1;
-    }
-    return pos;
 }

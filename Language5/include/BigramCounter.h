@@ -163,16 +163,15 @@ private:
      * @return A reference to the element at the given position
      */
     int &operator()(int row, int column);
+    
     void allocate(int n_elements);
     void deallocate();
-      /**
-     * @brief Provides location of a certain bigram in the matrix
-     * Query method
-     * @param bigram Bigram to be found. Input parameter
-     * @return Position of the bigram in the matrix
-     * PRE-CONDITION Number of valid characters < 99 
+
+    /**
+     * @brief Sets all the values of the matrix to 0
+     * 
      */
-    int findBigramPos(const Bigram &bigram) const;
+    void resetMatrix();
 };
 
 #endif /* BIGRAM_COUNTER_H */
