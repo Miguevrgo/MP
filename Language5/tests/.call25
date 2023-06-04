@@ -1,1 +1,0 @@
-Test #25 [tests//learn_test_ES.test] valgrind --leak-check=full  ./dist/LEARN/GNU-Linux/LEARN  -l spanish -o tests/output/test_ES.bgr ../Books/test_ES.txt

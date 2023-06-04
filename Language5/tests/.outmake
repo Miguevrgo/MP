@@ -1,7 +1,0 @@
-"make" -f nbproject/Makefile-LEARN.mk QMAKE= SUBPROJECTS= .build-conf
-make[1]: se entra en el directorio '/home/miguevr/GitHub/MP/Language5'
-"make"  -f nbproject/Makefile-LEARN.mk dist/LEARN/GNU-Linux/LEARN
-make[2]: se entra en el directorio '/home/miguevr/GitHub/MP/Language5'
-make[2]: 'dist/LEARN/GNU-Linux/LEARN' está actualizado.
-make[2]: se sale del directorio '/home/miguevr/GitHub/MP/Language5'
-make[1]: se sale del directorio '/home/miguevr/GitHub/MP/Language5'

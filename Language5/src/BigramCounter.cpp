@@ -75,7 +75,7 @@ bool BigramCounter::setFrequency(const Bigram& bigram, int frequency){
     bool found = (fil != std::string::npos) && (col != std::string::npos);
     
     if (found){
-        (fil, col) = frequency;
+        _frequency[fil][col] = frequency;
     }
 
     return found;
@@ -92,7 +92,7 @@ void BigramCounter::increaseFrequency(const Bigram &bigram, int frequency){
         + " invalid bigram provided ");
     }
 
-    (fil, col) += frequency;
+    _frequency[fil][col] += frequency;
 }
 
 BigramCounter& BigramCounter::operator=(const BigramCounter &orig){
@@ -132,16 +132,25 @@ void BigramCounter::calculateFrequencies(const char *const fileName){
         throw std::ios_base::failure(std::string("void BigramCounter::calculateFrequencies(const char *const fileName)") 
         + " file " + fileName + " could not be oppened");
     }
-    
-    this->resetMatrix();
 
+    this->resetMatrix();
+        
     std::string text, line;
     while(getline(inputStream, line)){
         text += line;
+        if (!inputStream.eof()) { // End of a line
+            text += ' ';
+        }
     }
     
+    
+    for(int i=0;i<text.length();i++){
+        text[i] = tolower(text[i]);
+    }
+
+    
     int text_size = text.length();
-    int text_size = 50;
+    
     for (int i=0,j=1;j<text_size;i++,j++){
         if(isValidCharacter(text.at(i),_validCharacters) && isValidCharacter(text.at(j),_validCharacters)){
             this->increaseFrequency(Bigram(text[i],text[j]),1);
@@ -172,9 +181,12 @@ Language BigramCounter::toLanguage() const{
             bigram.at(1) = this->_validCharacters[j];
 
             bigramfreq.setBigram(bigram);
-            bigramfreq.setFrequency((i,j));
-
-            lang.append(bigramfreq);
+            bigramfreq.setFrequency((*this)(i, j));
+            
+            if(bigramfreq.getFrequency()!=0){
+                lang.append(bigramfreq);
+            }
+            
         }
     }
 
@@ -211,7 +223,7 @@ void BigramCounter::resetMatrix(){
 
     for (unsigned int i=0;i<length;i++){
         for (unsigned int j=0;j<length;j++){
-            (i,j)=0;
+            _frequency[i][j]=0;
         }
     }
 }

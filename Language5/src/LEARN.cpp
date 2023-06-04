@@ -116,12 +116,13 @@ int main(int argc, char *argv[]) {
 
     Language lang;
     lang.setLanguageId(language);
-    
+
     for(unsigned int i=num_param;i<argc;i++){
         builder.calculateFrequencies(argv[i]);
         lang += builder.toLanguage();
     }
     
+    lang.sort();
     lang.save(output.c_str(),mode);
 
     return 0;

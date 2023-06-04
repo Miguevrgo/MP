@@ -1,1 +1,0 @@
-Test #12 [tests//join_missingArguments.test] valgrind --leak-check=full  ./dist/JOIN/GNU-Linux/JOIN 

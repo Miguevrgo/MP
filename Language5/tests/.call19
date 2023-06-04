@@ -1,1 +1,0 @@
-Test #19 [tests//learn_invalidArguments2.test] valgrind --leak-check=full  ./dist/LEARN/GNU-Linux/LEARN  -L spanish -o tests/output/quijote.bgr ../Books/quijote.txt

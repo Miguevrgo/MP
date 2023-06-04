@@ -220,8 +220,9 @@ void Language::save(const char fileName[], char mode) const{
             throw std::ios_base::failure(std::string("void Language::save(const char fileName[]) const") 
             + "failed opening the file");
         }
-        outputStream << MAGIC_STRING_B + "\n";
-        outputStream << _languageId + "\n";
+        outputStream << MAGIC_STRING_B << "\n";
+        outputStream << _languageId << "\n";
+        outputStream << _size << "\n";
         for(unsigned int i=0; i<_size;i++){
             _vectorBigramFreq[i].serialize(outputStream);
         }
@@ -239,7 +240,7 @@ void Language::save(const char fileName[], char mode) const{
 void Language::load(const char fileName[]) {
     std::ifstream inputStream;
     std::string cadena_magica;
-    
+    deallocate();
     inputStream.open(fileName, std::ios::in | std::ios::binary);
     if (!inputStream){
         throw std::ios_base::failure(std::string("void Language::load(const char fileName[])") 
@@ -283,9 +284,7 @@ void Language::load(const char fileName[]) {
         + "MAGIC_STRING invalid name " + cadena_magica);
     }
     
-    
-    
-    
+
     
     inputStream.close(); 
 }

@@ -1,4 +1,0 @@
-%%%OUTPUT
-Error, run with the following parameters:
-CLASSIFY <text.txt> <lang1.bgr> [<lang2.bgr> <lang3.bgr> ....]
-          Obtains the identifier of the closest language to the input text file

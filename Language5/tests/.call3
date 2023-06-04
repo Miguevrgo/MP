@@ -1,1 +1,0 @@
-Test #3 [tests//classify_missingParameters1.test] valgrind --leak-check=full  ./dist/CLASSIFY/GNU-Linux/CLASSIFY 

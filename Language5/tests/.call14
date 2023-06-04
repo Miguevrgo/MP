@@ -1,1 +1,0 @@
-Test #14 [tests//join_spanish.test] valgrind --leak-check=full  ./dist/JOIN/GNU-Linux/JOIN  -o tests/output/spanish.bgr ../Books/BodasdeSangre_FedericoGarciaLorca.bgr ../Books/quijote.bgr

@@ -1,1 +1,0 @@
-Test #5 [tests//classify_quijote.test] valgrind --leak-check=full  ./dist/CLASSIFY/GNU-Linux/CLASSIFY  ../Books/quijote.txt ../Books/esp.bgr

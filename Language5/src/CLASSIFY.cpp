@@ -54,10 +54,9 @@ int main(int argc, char *argv[]) {
     double min_distance = 50; //Impossible distance value
     std::string decision = "unknown"; // Final language decision
 
-    for(int i=pos_param;i<argc;i++){
+    for(unsigned int i=pos_param;i<argc;i++){
         aux.load(argv[i]);
         decltype(classify.getDistance(aux)) distance = classify.getDistance(aux);
-
         if (distance < min_distance){
             min_distance = distance;
             decision = aux.getLanguageId();

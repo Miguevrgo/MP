@@ -1,1 +1,0 @@
-Test #1 [tests//classify_BodasSangre.test] valgrind --leak-check=full  ./dist/CLASSIFY/GNU-Linux/CLASSIFY  ../Books/BodasdeSangre_FedericoGarciaLorca.txt ../Books/changedMan.bgr ../Books/lesMiserables.bgr ../Books/fortunata.bgr ../Books/Die_Verwandlung.Franz_Kafka.German.bgr
