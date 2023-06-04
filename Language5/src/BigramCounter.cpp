@@ -143,6 +143,12 @@ void BigramCounter::calculateFrequencies(const char *const fileName){
             this->increaseFrequency(Bigram(text[i],text[j]),1);
 
         }
+        // If the second character is not valid we should skip two positions
+        // to avoid unnecessary checks
+        else if(!isValidCharacter(text.at(j),_validCharacters)){
+            i++;
+            j++;
+        }
     }
 
     inputStream.close();
