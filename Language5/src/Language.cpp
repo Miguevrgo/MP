@@ -51,7 +51,7 @@ Language& Language::operator=(const Language& orig){
         this->deallocate();
         this->allocate(orig.getSize());
         this->_languageId=orig._languageId;
-        for (int i=0;i<_size;i++){
+        for (unsigned int i=0;i<_size;i++){
             this->_vectorBigramFreq[i]=orig._vectorBigramFreq[i];
         }
     }

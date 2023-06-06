@@ -31,7 +31,7 @@ BigramCounter::BigramCounter(std::string validChars){
 
     //Initialize the array to 0
     for (unsigned int i=0;i<length;i++){
-        for (int j=0;j<length;j++){
+        for (unsigned int j=0;j<length;j++){
             _frequency[i][j] = 0;
         }
     }
@@ -40,7 +40,7 @@ BigramCounter::BigramCounter(const BigramCounter &orig){
     this->allocate(orig.getSize());
     this->_validCharacters =orig._validCharacters;
     for (unsigned int i=0;i<orig.getSize();i++){
-        for (int j=0;j<orig.getSize();j++){
+        for (unsigned int j=0;j<orig.getSize();j++){
             _frequency[i][j]=orig._frequency[i][j];
         }
     }
@@ -57,8 +57,8 @@ int BigramCounter::getSize() const{
 int BigramCounter::getNumberActiveBigrams() const{
     unsigned int length = _validCharacters.length();
     unsigned int counter = 0;
-    for (int i=0;i<length;i++){
-        for (int j=0;j<length;j++){
+    for (unsigned int i=0;i<length;i++){
+        for (unsigned int j=0;j<length;j++){
             if (_frequency[i][j] > 0){
                 counter++;
             }
@@ -100,8 +100,8 @@ BigramCounter& BigramCounter::operator=(const BigramCounter &orig){
         this->deallocate();
         this->allocate(orig.getSize());
         this->_validCharacters = orig._validCharacters;
-        for (int i=0;i<orig.getSize();i++){
-            for (int j=0;j<orig.getSize();j++){
+        for (unsigned int i=0;i<orig.getSize();i++){
+            for (unsigned int j=0;j<orig.getSize();j++){
                 this->_frequency[i][j] = orig._frequency[i][j];
             }
         }
@@ -151,18 +151,20 @@ void BigramCounter::calculateFrequencies(const char *const fileName){
     
     int text_size = text.length();
     
-    for (int i=0,j=1;j<text_size;i++,j++){
-        if(isValidCharacter(text.at(i),_validCharacters) && isValidCharacter(text.at(j),_validCharacters)){
+    for (unsigned int i=0,j=1;j<text_size;i++,j++){
+        if(text.at(i)!=' ' && text.at(j)!=' '){ //Optimization of the method (not necessary)
+            if(isValidCharacter(text.at(i),_validCharacters) && isValidCharacter(text.at(j),_validCharacters)){
             this->increaseFrequency(Bigram(text[i],text[j]),1);
 
-        }
-        // If the second character is not valid we should skip two positions
-        // to avoid unnecessary checks
-        else if(!isValidCharacter(text.at(j),_validCharacters)){
-            i++;
-            j++;
-        }
-    }
+            }
+            // If the second character is not valid we should skip two positions
+            // to avoid unnecessary checks
+            else if(!isValidCharacter(text.at(j),_validCharacters)){
+                i++;
+                j++;
+            } 
+        } 
+    } // End for
     
     inputStream.close();
 }

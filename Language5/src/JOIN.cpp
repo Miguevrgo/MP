@@ -53,14 +53,14 @@ int main(int argc, char* argv[]) {
     char mode = 't';    // Binary mode.
     std::string output = "output.bgr";
 
-    bool valid_param = true;
+    bool valid_param = true; // If the parameters are valid
     bool reused_option = false; // If an option has been already used
 
 
     bool tb_option = false; // Binary or text mode
     bool out_option = false; // Output file name
 
-    unsigned int num_param(1); // Number of parametre to be cheked
+    unsigned int num_param(1); // Number of parameters to be checked
 
     while(valid_param && !reused_option && argv[num_param][0] == '-'){
         
@@ -103,7 +103,8 @@ int main(int argc, char* argv[]) {
 
     Language lang, aux;
     lang.load(argv[num_param++]);
-
+    
+    // Loading and joining languages
     for(unsigned int i=num_param;i<argc;i++){
         aux.load(argv[i]);
         lang += aux;

@@ -44,10 +44,13 @@ int main(int argc, char *argv[]) {
     }
 
     unsigned int pos_param(1);
-
+    
+    //Input text file used as reference to be classified
     BigramCounter builder;
     builder.calculateFrequencies(argv[pos_param++]);
-
+    
+    
+    //Language to be classified
     Language classify(builder.toLanguage());
     Language aux;
 
@@ -62,7 +65,8 @@ int main(int argc, char *argv[]) {
             decision = aux.getLanguageId();
         }
     }
-
+    
+    //Final decision 
     std::cout << "Final decision: language " << decision 
               << " with a distance of " << min_distance << std::endl;
 
