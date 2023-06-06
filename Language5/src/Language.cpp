@@ -268,6 +268,8 @@ void Language::load(const char fileName[]) {
         inputStream >> this->_languageId;
         inputStream >> this->_size;
         
+        inputStream.ignore();
+
         if(_size < 0){
             throw std::out_of_range(std::string("void Language::load(const char fileName[])")
                     + "invalid negative size " + std::to_string(_size));
