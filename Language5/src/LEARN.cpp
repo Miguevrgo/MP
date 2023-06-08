@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
     bool id_option = false; // Language ID
     bool out_option = false; // Output file name
 
-    unsigned int num_param(1); // Number of parametre to be cheked
+    unsigned int num_param(1); // Number of parametre to be checked
 
     while(!reused_option && valid_param && argv[num_param][0] == '-'){
 
