@@ -246,19 +246,7 @@ void Language::load(const char fileName[]) {
     inputStream >> cadena_magica;
     
     if(cadena_magica == MAGIC_STRING_T){
-        inputStream >> this->_languageId;
-        inputStream >> this->_size;
-        
-        if(_size < 0){
-            throw std::out_of_range(std::string("void Language::load(const char fileName[])")
-                    + "invalid negative size " + std::to_string(_size));
-        }
-        
-        allocate(_size);
-        
-        for(unsigned int i=0;i<_size;i++){
-            inputStream >> this->_vectorBigramFreq[i];
-        }
+        inputStream >> (*this);
     }
     else if(cadena_magica == MAGIC_STRING_B){
         inputStream >> this->_languageId;
@@ -317,9 +305,11 @@ const BigramFreq& Language::operator[](int index) const{
 }
 
 Language& Language::operator+=(const Language &language){
-    for (unsigned int i=0;i<language.getSize();i++){
+    unsigned int size = language.getSize();
+    for (unsigned int i = 0; i < size; i++) {
         append(language.at(i));
     }
+
     return *this;
 }
 
@@ -374,9 +364,20 @@ std::ostream &operator<<(std::ostream &os, const Language &language){
 }
 
 std::istream& operator>>(std::istream& is, Language& language) {
-  
-    // Leer cada par bigrama-frecuencia
-    for (int i = 0; i < language.getSize(); i++) {
+    language.deallocate();
+
+    is >> language._languageId;
+    is >> language._size;
+
+    if (language._size<0){
+        throw std::out_of_range(std::string("std::istream& operator>>(std::istream& is, Language& language)") 
+        + "invalid size");
+    }
+
+    language.allocate(language._size);
+
+    // Read each bigram frequency pair
+    for (int i = 0; i < language._size; i++) {
         BigramFreq bigramFreq;
         is >> bigramFreq;
         language.at(i) = bigramFreq;

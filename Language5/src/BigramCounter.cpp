@@ -37,10 +37,11 @@ BigramCounter::BigramCounter(std::string validChars){
     }
 }
 BigramCounter::BigramCounter(const BigramCounter &orig){
-    this->allocate(orig.getSize());
+    unsigned int size = orig.getSize();
+    this->allocate(size);
     this->_validCharacters =orig._validCharacters;
-    for (unsigned int i=0;i<orig.getSize();i++){
-        for (unsigned int j=0;j<orig.getSize();j++){
+    for (unsigned int i=0;size;i++){
+        for (unsigned int j=0;j<size;j++){
             _frequency[i][j]=orig._frequency[i][j];
         }
     }
@@ -97,11 +98,12 @@ void BigramCounter::increaseFrequency(const Bigram &bigram, int frequency){
 
 BigramCounter& BigramCounter::operator=(const BigramCounter &orig){
     if (this!=&orig){
+        unsigned int size = orig.getSize();
         this->deallocate();
-        this->allocate(orig.getSize());
+        this->allocate(size);
         this->_validCharacters = orig._validCharacters;
-        for (unsigned int i=0;i<orig.getSize();i++){
-            for (unsigned int j=0;j<orig.getSize();j++){
+        for (unsigned int i=0;i<size;i++){
+            for (unsigned int j=0;j<size;j++){
                 this->_frequency[i][j] = orig._frequency[i][j];
             }
         }
@@ -116,8 +118,9 @@ BigramCounter& BigramCounter::operator=(const BigramCounter &orig){
 }
 
 BigramCounter& BigramCounter::operator+=(const BigramCounter &rhs){
-    for (unsigned int i=0;i<getSize();i++){
-        for (unsigned int j=0;j<getSize();j++){
+    unsigned int size = rhs.getSize();
+    for (unsigned int i=0;i<size;i++){
+        for (unsigned int j=0;j<size;j++){
             this->_frequency[i][j] += rhs._frequency[i][j];
         }
     }
