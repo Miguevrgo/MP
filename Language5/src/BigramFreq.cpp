@@ -69,14 +69,13 @@ std::istream &operator>>(std::istream &is, BigramFreq& bigramFreq){
     return is;
 }
 
-bool operator>(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
+bool operator>(const BigramFreq& bigramFreq1, const BigramFreq& bigramFreq2) {
     bool greater = false;
 
-    if (bigramFreq1.getFrequency() > bigramFreq2.getFrequency()){
+    if (bigramFreq1.getFrequency() > bigramFreq2.getFrequency()) {
         greater = true;
-    }
-    else if (bigramFreq1.getFrequency() == bigramFreq2.getFrequency()){
-        if (bigramFreq1.getBigram().getText().compare(bigramFreq2.getBigram().getText()) > 0){
+    } else if (bigramFreq1.getFrequency() == bigramFreq2.getFrequency()) {
+        if (bigramFreq1.getBigram().getText().compare(bigramFreq2.getBigram().getText()) < 0) {
             greater = true;
         }
     }
@@ -85,7 +84,7 @@ bool operator>(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
 }
 
 bool operator<(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
-    return !(operator>(bigramFreq1, bigramFreq2) || operator==(bigramFreq1, bigramFreq2));
+    return !((bigramFreq1 > bigramFreq2) || (bigramFreq1 == bigramFreq2));
 }
 
 bool operator==(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
@@ -101,13 +100,13 @@ bool operator==(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
 }
 
 bool operator!=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
-    return(!operator==(bigramFreq1, bigramFreq2));
+    return(!(bigramFreq1 == bigramFreq2));
 }
 
 bool operator<=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
-    return(!operator>(bigramFreq1, bigramFreq2));
+    return(!(bigramFreq1 > bigramFreq2));
 }
 
 bool operator>=(const BigramFreq& bigramFreq1,const BigramFreq& bigramFreq2){
-    return(!operator<(bigramFreq1, bigramFreq2));
+    return(!(bigramFreq1 < bigramFreq2));
 }

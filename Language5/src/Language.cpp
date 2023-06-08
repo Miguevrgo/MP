@@ -169,14 +169,10 @@ void quickSort(BigramFreq array[], int nElements, int start, int end){
     int i = start;
     int j = end;
     while (i <= j) {
-        while (array[i].getFrequency() > pivot.getFrequency() || 
-               (array[i].getFrequency() == pivot.getFrequency() && 
-                array[i].getBigram().toString() < pivot.getBigram().toString())) {
+        while (array[i] > pivot) {
             i++;
         }
-        while (array[j].getFrequency() < pivot.getFrequency() || 
-               (array[j].getFrequency() == pivot.getFrequency() && 
-                array[j].getBigram().toString() > pivot.getBigram().toString())) {
+        while (array[j] < pivot) {
             j--;
         }
         if (i <= j) {
