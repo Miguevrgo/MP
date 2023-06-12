@@ -38,9 +38,9 @@ BigramCounter::BigramCounter(std::string validChars){
 }
 BigramCounter::BigramCounter(const BigramCounter &orig){
     unsigned int size = orig.getSize();
-    this->allocate(size);
     this->_validCharacters =orig._validCharacters;
-    for (unsigned int i=0;size;i++){
+    this->allocate(size);
+    for (unsigned int i=0;i<size;i++){
         for (unsigned int j=0;j<size;j++){
             _frequency[i][j]=orig._frequency[i][j];
         }
@@ -92,8 +92,12 @@ void BigramCounter::increaseFrequency(const Bigram &bigram, int frequency){
         throw std::invalid_argument(std::string("void BigramCounter::increaseFrequency(const Bigram &bigram, int frequency)")
         + " invalid bigram provided ");
     }
-
-    _frequency[fil][col] += frequency;
+    if(frequency==0){
+        _frequency[fil][col] += 1;
+    }
+    else{
+        _frequency[fil][col] += frequency; 
+    } 
 }
 
 BigramCounter& BigramCounter::operator=(const BigramCounter &orig){
