@@ -43,7 +43,7 @@ public:
      * @param validChars The set of characters that are considered as 
      * part of a word. Input parameter
      */
-    BigramCounter(std::string validChars = DEFAULT_VALID_CHARACTERS);
+    BigramCounter(const std::string &validChars = DEFAULT_VALID_CHARACTERS);
 
     /**
      * @brief Copy constructor
